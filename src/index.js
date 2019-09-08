@@ -1,9 +1,8 @@
-/* Todos los imports de los componentes se ubican aquí */
-// import MyComponent from "./myComponent";
-import ButtonFake from "./modules/ButtonFake";
+import React from "react";
+import { Button } from "@material-ui/core";
 
-/* Aquí se construye la exportación de los componentes. Procurar
-ordenarlos por orden alfabético o en el mismo orden que tiene a nivel
-folders. */
+/** Fake button ?
+ *  */
+const MyButton = () => <Button>Foobar</Button>;
 
-export { ButtonFake };
+export { MyButton };
