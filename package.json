@@ -16,12 +16,12 @@
     "url": "https://github.com/boneless-chicken/Nugget-UI/issues",
     "email": "bonelesschicken.soft@gmail.com"
   },
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "files": [
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "babel src -d dist",
     "dev": "nodemon -w src --exec npm run build"
   },
   "devDependencies": {
