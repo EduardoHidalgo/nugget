@@ -8,8 +8,6 @@ Librería de componentes React basados en Material-UI, enfocado en la fácil imp
 
 ## Scripts
 
----
-
 - build
 
 > Realiza la transpilación de la librería mediante Babel, el resultado es un folder "dist" con la build.
@@ -39,8 +37,6 @@ Librería de componentes React basados en Material-UI, enfocado en la fácil imp
 > Corrige la mayoría de los errores de ESLint detectados de forma automática.
 
 ## Instalación local
-
----
 
 1. Clonar repositorio desde https://github.com/boneless-chicken/Nugget-UI.git
 2. Ejecutar el comando **npm install**.
