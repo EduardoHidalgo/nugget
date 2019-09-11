@@ -1,6 +1,6 @@
 {
   "name": "nugget-ui",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "Librería de componentes React basados en Material-UI, enfocado en la fácil implementación y maquetación de layouts complejos.",
   "license": "MIT License",
   "contributors": [
@@ -26,6 +26,9 @@
     "copy-nugget:win": "npm run build && xcopy dist ..\\wings\\node_modules\\nugget-ui\\dist /Y /F /S /E /I",
     "package:win": "npm run build && del nugget.tgz && del nugget-ui-0.1.4.tgz && npm run build && npm pack && rename nugget-ui-0.1.4.tgz nugget.tgz",
     "prepare": "",
+    "update:patch": "npm version patch",
+    "update:minor": "npm version minor",
+    "update:major": "npm version major",
     "lint-init": "./node_modules/.bin/eslint --init",
     "lint": "./node_modules/.bin/eslint --config ./.eslintrc.json src/**",
     "lint-fix": "./node_modules/.bin/eslint --config ./.eslintrc.json src/** --fix"
