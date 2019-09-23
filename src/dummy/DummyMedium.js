@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Module() {
+export default function DummyMedium() {
   const classes = useStyles();
 
   return (
