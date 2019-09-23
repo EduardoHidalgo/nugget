@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import AppBarTitle from "../low/text/AppBarTitle";
 
 const drawerWidth = 240;
 
@@ -19,9 +19,7 @@ export default function AppBarBase() {
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
-        <Typography variant="h6" noWrap>
-          Permanent drawer
-        </Typography>
+        <AppBarTitle>Permanent drawer</AppBarTitle>
       </Toolbar>
     </AppBar>
   );

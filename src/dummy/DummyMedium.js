@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import Paragraph from "../low/text/Paragraph";
 
 const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar,
@@ -18,7 +18,7 @@ export default function Module() {
     <Fragment>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph>
+        <Paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
           dolor purus non enim praesent elementum facilisis leo vel. Risus at
@@ -32,8 +32,8 @@ export default function Module() {
           vivamus at augue. At augue eget arcu dictum varius duis at consectetur
           lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
           faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
+        </Paragraph>
+        <Paragraph>
           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
           ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
           elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
@@ -46,7 +46,7 @@ export default function Module() {
           sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
           eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
           posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        </Paragraph>
       </main>
     </Fragment>
   );
