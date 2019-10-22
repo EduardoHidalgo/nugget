@@ -1,6 +1,6 @@
 /* --- BASE COMPONENTS --- */
 
-export { default as DashboardBase } from "./base/DashboardBase";
+export { default as Dashboard } from "./base/DashboardBase";
 
 /* --- LOW COMPONENTS --- */
 
@@ -10,3 +10,4 @@ export { default as Module } from "./low/Module";
 
 export { default as DummySmall } from "./dummy/DummySmall";
 export { default as DummyMedium } from "./dummy/DummyMedium";
+export { default as DummyLarge } from "./dummy/DummyLarge";
