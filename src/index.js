@@ -4,7 +4,7 @@ export { default as Dashboard } from "./base/DashboardBase";
 
 /* --- LOW COMPONENTS --- */
 
-export { default as Module } from "./low/Module";
+export { default as Module } from "./low/module/Module";
 
 /* --- DUMMY COMPONENTS --- */
 
