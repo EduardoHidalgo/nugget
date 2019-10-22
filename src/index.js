@@ -1,61 +1,13 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+/* --- BASE COMPONENTS --- */
 
-/** Fake button ?
- *  */
-const useStyles = makeStyles(theme => ({
-  button: {
-    margin: theme.spacing(1)
-  },
-  input: {
-    display: "none"
-  }
-}));
+export { default as Dashboard } from "./base/DashboardBase";
 
-export default function MyButton() {
-  const classes = useStyles();
+/* --- LOW COMPONENTS --- */
 
-  return (
-    <div>
-      <Button variant="contained" className={classes.button}>
-        Default test 2
-      </Button>
-      <Button variant="contained" color="primary" className={classes.button}>
-        Primary
-      </Button>
-      <Button variant="contained" color="secondary" className={classes.button}>
-        Secondary
-      </Button>
-      <Button
-        variant="contained"
-        color="secondary"
-        disabled
-        className={classes.button}
-      >
-        Disabled
-      </Button>
-      <Button
-        variant="contained"
-        href="#contained-buttons"
-        className={classes.button}
-      >
-        Link
-      </Button>
-      <input
-        accept="image/*"
-        className={classes.input}
-        id="contained-button-file"
-        multiple
-        type="file"
-      />
-      <label htmlFor="contained-button-file">
-        <Button variant="contained" component="span" className={classes.button}>
-          Upload
-        </Button>
-      </label>
-    </div>
-  );
-}
+export { default as Module } from "./low/module/Module";
 
-export { MyButton };
+/* --- DUMMY COMPONENTS --- */
+
+export { default as DummySmall } from "./dummy/DummySmall";
+export { default as DummyMedium } from "./dummy/DummyMedium";
+export { default as DummyLarge } from "./dummy/DummyLarge";
