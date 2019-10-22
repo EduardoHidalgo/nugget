@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import TextBase from "../../base/TextBase";
 
 export default function Title(props) {
@@ -8,3 +9,10 @@ export default function Title(props) {
     </TextBase>
   );
 }
+
+Title.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
+};

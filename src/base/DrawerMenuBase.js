@@ -1,45 +1,54 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import Divider from "@material-ui/core/Divider";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import {
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider
+} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar
 }));
 
-export default function DrawerMenuBase() {
+export default function DrawerMenuBase(props) {
   const classes = useStyles();
+
+  const titles = props.titles;
+  const icons = props.icons;
+  const keys = props.keys;
+
+  /* Manda la variable "key" para indicar que módulo fué seleccionado */
+  const HandleClick = key => props.handleModule(key);
 
   return (
     <Fragment>
-      <div className={classes.toolbar} />
+      {/* Añade un toolbar spacing en el caso de que sea tipo "persistent" */}
+      {props.type != "persistent" ? <div className={classes.toolbar} /> : null}
       <Divider />
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
+      <List dense disablePadding>
+        {/* Mapea los módulos recibidos en el drawer */}
+        {titles.map((text, index) => (
+          <ListItem
+            button
+            key={keys[index]}
+            onClick={() => HandleClick(keys[index])}
+          >
+            <ListItemIcon>{icons[index]}</ListItemIcon>
+            <ListItemText disableTypography>{text}</ListItemText>
           </ListItem>
         ))}
       </List>
     </Fragment>
   );
 }
+
+DrawerMenuBase.propTypes = {
+  type: PropTypes.string,
+  keys: PropTypes.array.isRequired,
+  titles: PropTypes.array.isRequired,
+  icons: PropTypes.arrayOf(PropTypes.element).isRequired,
+  handleModule: PropTypes.func.isRequired
+};

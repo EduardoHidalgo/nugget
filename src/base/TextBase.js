@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Typography from "@material-ui/core/Typography";
+import { Typography } from "@material-ui/core";
 
 /** TextBase. It serve as base of all texts. Provide and expose the Material-UI
  * Typography component to build Low components derivated from.
@@ -32,6 +32,18 @@ export default function TextBase(props) {
   );
 }
 
+TextBase.defaultProps = {
+  classes: {},
+  align: "inherit",
+  component: null,
+  display: "initial",
+  gutterBottom: false,
+  noWrap: false,
+  paragraph: false,
+  variant: "body1",
+  children: "Text Example"
+};
+
 TextBase.propTypes = {
   classes: PropTypes.object,
   align: PropTypes.string,
@@ -46,16 +58,4 @@ TextBase.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired
-};
-
-TextBase.defaultProps = {
-  classes: {},
-  align: "inherit",
-  component: null,
-  display: "initial",
-  gutterBottom: false,
-  noWrap: false,
-  paragraph: false,
-  variant: "body1",
-  children: "Text Example"
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
+import { IconButton } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   iconButton: {
@@ -26,6 +26,16 @@ export default function IconButtonBase() {
   );
 }
 
+IconButtonBase.defaultProps = {
+  classes: {},
+  disabled: false,
+  disableFocusRipple: false,
+  disableRipple: false,
+  edge: false,
+  size: "medium",
+  children: "Text Example"
+};
+
 IconButtonBase.propTypes = {
   classes: PropTypes.object,
   disabled: PropTypes.bool,
@@ -35,14 +45,4 @@ IconButtonBase.propTypes = {
   size: PropTypes.string,
 
   children: PropTypes.node.isRequired
-};
-
-IconButtonBase.defaultProps = {
-  classes: {},
-  disabled: false,
-  disableFocusRipple: false,
-  disableRipple: false,
-  edge: false,
-  size: "medium",
-  children: "Text Example"
 };

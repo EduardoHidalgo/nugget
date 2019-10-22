@@ -5,14 +5,12 @@ import Paragraph from "../low/text/Paragraph";
 
 export default function DummySmall() {
   return (
-    <div>
-      <PaperBase>
-        <Title>This is a sheet of paper.</Title>
-        <Paragraph>
-          Paper can be used to build surface or other elements for your
-          application.
-        </Paragraph>
-      </PaperBase>
-    </div>
+    <PaperBase>
+      <Title>This is a sheet of paper.</Title>
+      <Paragraph>
+        Paper can be used to build surface or other elements for your
+        application.
+      </Paragraph>
+    </PaperBase>
   );
 }

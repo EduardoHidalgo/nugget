@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paragraph from "../low/text/Paragraph";
 
 const useStyles = makeStyles(theme => ({
-  toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
@@ -17,7 +16,6 @@ export default function DummyLarge() {
   return (
     <Fragment>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
         <Paragraph>
           {[...new Array(40)]
             .map(

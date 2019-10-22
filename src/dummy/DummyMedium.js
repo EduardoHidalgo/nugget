@@ -1,11 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import PaperBase from "../base/PaperBase";
 import Paragraph from "../low/text/Paragraph";
 
 const useStyles = makeStyles(theme => ({
-  toolbar: theme.mixins.toolbar,
   content: {
-    flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3)
   }
@@ -15,9 +14,8 @@ export default function DummyMedium() {
   const classes = useStyles();
 
   return (
-    <Fragment>
+    <PaperBase>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
         <Paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
@@ -48,6 +46,6 @@ export default function DummyMedium() {
           posuere sollicitudin aliquam ultrices sagittis orci a.
         </Paragraph>
       </main>
-    </Fragment>
+    </PaperBase>
   );
 }
