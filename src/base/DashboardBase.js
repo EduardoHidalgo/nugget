@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import PersistentDashboard from "../high/dashboard/PersistentDashboard";
 import PermanentDashboard from "../high/dashboard/PermanentDashboard";
 import TemporaryDashboard from "../high/dashboard/TemporaryDashboard";
+import MobileDashboard from "../high/dashboard/MobileDashboard";
 
 export default function DashboardBase(props) {
   const type = props.type;
@@ -59,6 +60,10 @@ export default function DashboardBase(props) {
             openDrawer: openDrawer,
             drawerWidth: 240
           });
+        case "mobile":
+          return cloneElement(m, {
+            moduleType: "mobile"
+          });
         default:
           return cloneElement(m, {
             moduleType: "permanent"
@@ -114,6 +119,20 @@ export default function DashboardBase(props) {
     </TemporaryDashboard>
   );
 
+  const mobileDashboard = (
+    <MobileDashboard
+      openDrawer={openDrawer}
+      handleOpenDrawer={HandleOpenDrawer}
+      handleCloseDrawer={HandleCloseDrawer}
+      keys={keys}
+      titles={titles}
+      icons={icons}
+      handleModule={HandleModule}
+    >
+      {modules != null ? modules[moduleIndex] : null}
+    </MobileDashboard>
+  );
+
   switch (type) {
     case "permanent":
       return permanentDashboard;
@@ -121,13 +140,15 @@ export default function DashboardBase(props) {
       return persistentDashboard;
     case "temporary":
       return temporaryDashboard;
+    case "mobile":
+      return mobileDashboard;
     default:
       return permanentDashboard;
   }
 }
 
 DashboardBase.propTypes = {
-  type: PropTypes.oneOf(["permanent", "persistent", "temporary"]),
+  type: PropTypes.oneOf(["permanent", "persistent", "temporary", "mobile"]),
   enableElevation: PropTypes.bool,
   enableHide: PropTypes.bool,
   children: PropTypes.oneOfType([
