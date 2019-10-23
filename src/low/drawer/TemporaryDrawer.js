@@ -22,8 +22,6 @@ export default function TemporaryDrawer(props) {
   return (
     <DrawerBase
       classes={classes}
-      /* Establece el feature "swippeable drawer" siempre que
-      es versión mobile */
       type={props.swippeable ? "mobile" : "temporary"}
       {...props}
     />
