@@ -28,6 +28,7 @@ export default function MobileDashboard(props) {
         icons={props.icons}
         handleModule={props.handleModule}
         handleCloseDrawer={props.handleCloseDrawer}
+        swippeable
       />
       {props.children}
     </div>
