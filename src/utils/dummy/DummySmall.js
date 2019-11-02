@@ -1,7 +1,7 @@
-import React, { useEffect, Suspense, cloneElement } from "react";
-import PaperBase from "../base/PaperBase";
-import Title from "../low/text/Title";
-import Fetching from "../utils/Fetching";
+import React from "react";
+import PaperBase from "../../common/PaperBase";
+import Title from "../../text/Title";
+import Fetching from "../fetching/Fetching";
 
 function Pokemons(props) {
   const { data } = props;

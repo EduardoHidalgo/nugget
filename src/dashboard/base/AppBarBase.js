@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useScrollTrigger, Slide, AppBar, Toolbar } from "@material-ui/core";
-import AppBarTitle from "../low/text/AppBarTitle";
+import AppBarTitle from "../../text/AppBarTitle";
 
 /* Componente para la animación de Elevación en AppBar */
 function ElevationScroll(props) {

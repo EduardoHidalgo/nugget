@@ -1,7 +1,7 @@
 /* --- DASHBOARD --- */
 
-export { default as Dashboard } from "./base/DashboardBase";
-export { default as Module } from "./low/module/Module";
+export { default as Dashboard } from "./dashboard/base/DashboardBase";
+export { default as Module } from "./dashboard/low/module/Module";
 
 /* --- COMMON --- */
 
@@ -12,10 +12,10 @@ export { default as Text } from "./common/TextBase";
 
 /* --- UTILS --- */
 
-export { default as Fetching } from "./utils/Fetching";
+export { default as Fetching } from "./utils/fetching/Fetching";
 
 /* --- DUMMY COMPONENTS --- */
 
-export { default as DummySmall } from "./dummy/DummySmall";
-export { default as DummyMedium } from "./dummy/DummyMedium";
-export { default as DummyLarge } from "./dummy/DummyLarge";
+export { default as DummySmall } from "./utils/dummy/DummySmall";
+export { default as DummyMedium } from "./utils/dummy/DummyMedium";
+export { default as DummyLarge } from "./utils/dummy/DummyLarge";
