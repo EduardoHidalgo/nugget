@@ -19,11 +19,18 @@ const useStyles = makeStyles(theme => ({
 export default function TemporaryDrawer(props) {
   const classes = useStyles(props);
 
-  return <DrawerBase classes={classes} type={"temporary"} {...props} />;
+  return (
+    <DrawerBase
+      classes={classes}
+      type={props.swippeable ? "mobile" : "temporary"}
+      {...props}
+    />
+  );
 }
 
 TemporaryDrawer.defaultProps = {
-  drawerWidth: 240
+  drawerWidth: 240,
+  swippleable: false
 };
 
 TemporaryDrawer.propTypes = {
@@ -32,6 +39,7 @@ TemporaryDrawer.propTypes = {
   openDrawer: PropTypes.bool.isRequired,
   handleModule: PropTypes.func.isRequired,
   handleCloseDrawer: PropTypes.func.isRequired,
+  swippleable: PropTypes.bool,
 
   /* Deep props */
   keys: PropTypes.arrayOf(String).isRequired,

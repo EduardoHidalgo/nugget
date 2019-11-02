@@ -55,6 +55,7 @@ function HideOnScroll(props) {
 export default function AppBarBase(props) {
   const [enableElevation] = useState(props.enableElevation);
   const [enableHide, setEnableHide] = useState(props.enableHide);
+  const title = props.title;
 
   /* Previene el uso de ambos efectos para el AppBar. El ElevationScroll tiene mayor peso
   en jerarquía que HideOnScroll dado que requiere el prop "elevation". */
@@ -74,7 +75,7 @@ export default function AppBarBase(props) {
         <AppBar position={props.position} className={props.styles}>
           <Toolbar>
             {props.children}
-            <AppBarTitle>{props.title}</AppBarTitle>
+            {title ? <AppBarTitle>{props.title}</AppBarTitle> : null}
           </Toolbar>
         </AppBar>
       </HideOnScroll>
@@ -85,7 +86,6 @@ export default function AppBarBase(props) {
 AppBarBase.defaultProps = {
   enableElevation: false,
   enableHide: false,
-  title: "AppBar Title",
   position: "static"
 };
 
