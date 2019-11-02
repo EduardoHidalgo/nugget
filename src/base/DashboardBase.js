@@ -1,11 +1,24 @@
-import React, { useState, cloneElement } from "react";
+import React, { useState, cloneElement, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import PersistentDashboard from "../high/dashboard/PersistentDashboard";
 import PermanentDashboard from "../high/dashboard/PermanentDashboard";
 import TemporaryDashboard from "../high/dashboard/TemporaryDashboard";
+import MobileDashboard from "../high/dashboard/MobileDashboard";
+import { Hidden } from "@material-ui/core";
 
 export default function DashboardBase(props) {
-  const type = props.type;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const [type, setType] = useState(isMobile ? "mobile" : props.type);
+
+  useEffect(() => {
+    if (isMobile) setType("mobile");
+    else setType(props.type);
+  }, [isMobile]);
+
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const titles = props.children.map(m => m.props.title);
@@ -58,6 +71,10 @@ export default function DashboardBase(props) {
             moduleType: "temporary",
             openDrawer: openDrawer,
             drawerWidth: 240
+          });
+        case "mobile":
+          return cloneElement(m, {
+            moduleType: "mobile"
           });
         default:
           return cloneElement(m, {
@@ -114,20 +131,47 @@ export default function DashboardBase(props) {
     </TemporaryDashboard>
   );
 
-  switch (type) {
-    case "permanent":
-      return permanentDashboard;
-    case "persistent":
-      return persistentDashboard;
-    case "temporary":
-      return temporaryDashboard;
-    default:
-      return permanentDashboard;
-  }
+  const mobileDashboard = (
+    <MobileDashboard
+      openDrawer={openDrawer}
+      handleOpenDrawer={HandleOpenDrawer}
+      handleCloseDrawer={HandleCloseDrawer}
+      keys={keys}
+      titles={titles}
+      icons={icons}
+      handleModule={HandleModule}
+    >
+      {modules != null ? modules[moduleIndex] : null}
+    </MobileDashboard>
+  );
+
+  const GetDashboard = () => {
+    switch (type) {
+      case "permanent":
+        return permanentDashboard;
+      case "persistent":
+        return persistentDashboard;
+      case "temporary":
+        return temporaryDashboard;
+      case "mobile":
+        return mobileDashboard;
+      default:
+        return permanentDashboard;
+    }
+  };
+
+  /* Los hidden ayudan al primer render en mobile. Después del primer render
+  el hook "useMediaQuery" se encarga de calcular el breakpoint */
+  return (
+    <Fragment>
+      <Hidden smDown>{GetDashboard()}</Hidden>
+      <Hidden mdUp>{mobileDashboard}</Hidden>
+    </Fragment>
+  );
 }
 
 DashboardBase.propTypes = {
-  type: PropTypes.oneOf(["permanent", "persistent", "temporary"]),
+  type: PropTypes.oneOf(["permanent", "persistent", "temporary", "mobile"]),
   enableElevation: PropTypes.bool,
   enableHide: PropTypes.bool,
   children: PropTypes.oneOfType([
