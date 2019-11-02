@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paragraph from "../low/text/Paragraph";
+import Paragraph from "../../text/Paragraph";
 
 const useStyles = makeStyles(theme => ({
   content: {

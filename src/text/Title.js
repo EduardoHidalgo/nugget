@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TextBase from "../../base/TextBase";
+import TextBase from "../common/TextBase";
 
 export default function Title(props) {
   return (

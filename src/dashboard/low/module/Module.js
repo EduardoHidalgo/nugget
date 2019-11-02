@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import PermanentModule from "./PermanentModule";
 import PersistentModule from "./PersistentModule";
 import MobileModule from "./MobileModule";
-import ContainerBase from "../../base/ContainerBase";
+import ContainerBase from "../../../common/ContainerBase";
 
 export default function Module(props) {
   const { moduleType, drawerWidth, openDrawer, children } = props;

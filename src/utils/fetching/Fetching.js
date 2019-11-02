@@ -1,6 +1,6 @@
 import React, { Suspense, cloneElement } from "react";
 import PropTypes from "prop-types";
-import useFetch from "../utils/useFetch";
+import useFetch from "./useFetch";
 
 export default function Fetching(props) {
   const { url, fallback, fault, children } = props;
