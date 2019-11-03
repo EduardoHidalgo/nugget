@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import clsx from "clsx";
 import { useScrollTrigger, Slide, AppBar, Toolbar } from "@material-ui/core";
 import AppBarTitle from "../../text/AppBarTitle";
 
@@ -53,6 +54,7 @@ function HideOnScroll(props) {
 }
 
 export default function AppBarBase(props) {
+  const { classes } = props;
   const [enableElevation] = useState(props.enableElevation);
   const [enableHide, setEnableHide] = useState(props.enableHide);
   const title = props.title;
@@ -72,10 +74,18 @@ export default function AppBarBase(props) {
   return (
     <ElevationScroll enableElevation={enableElevation}>
       <HideOnScroll enableHide={enableHide}>
-        <AppBar position={props.position} className={props.styles}>
+        <AppBar
+          position={props.position}
+          className={clsx(classes.appBar, props.styles)}
+          classes={{ root: classes.root }}
+        >
           <Toolbar>
             {props.children}
-            {title ? <AppBarTitle>{props.title}</AppBarTitle> : null}
+            {title ? (
+              <AppBarTitle styles={classes.appBarTitle}>
+                {props.title}
+              </AppBarTitle>
+            ) : null}
           </Toolbar>
         </AppBar>
       </HideOnScroll>
@@ -96,6 +106,7 @@ AppBarBase.propTypes = {
   /* AppBarBase props */
   title: PropTypes.string,
   styles: PropTypes.string,
+  classes: PropTypes.object,
   position: PropTypes.oneOf([
     "absolute",
     "fixed",

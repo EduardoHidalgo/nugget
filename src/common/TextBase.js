@@ -18,6 +18,7 @@ import { Typography } from "@material-ui/core";
 export default function TextBase(props) {
   return (
     <Typography
+      className={props.styles}
       classes={props.classes}
       align={props.align}
       component={props.component}

@@ -6,7 +6,11 @@ import AppBarBase from "../../base/AppBarBase";
 const useStyles = makeStyles(theme => ({
   appBar: {
     width: props => `calc(100% - ${props.drawerWidth}px)`,
-    marginLeft: props => props.drawerWidth
+    marginLeft: props => props.drawerWidth,
+    ...theme.appBar
+  },
+  appBarTitle: {
+    ...theme.appBarTitle
   }
 }));
 
@@ -15,7 +19,7 @@ export default function PermanentAppBar(props) {
 
   return (
     <AppBarBase
-      styles={classes.appBar}
+      classes={classes}
       position={"fixed"}
       drawerWidth={props.drawerWidth}
       title={props.title}

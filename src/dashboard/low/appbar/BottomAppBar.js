@@ -8,15 +8,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 const useStyles = makeStyles(theme => ({
   appBar: {
     top: "auto",
-    bottom: 0
-  },
-  fabButton: {
-    position: "absolute",
-    zIndex: 1,
-    top: -30,
-    left: 0,
-    right: 0,
-    margin: "0 auto"
+    bottom: 0,
+    ...theme.appBar
   }
 }));
 
@@ -25,6 +18,7 @@ export default function BottomAppBar(props) {
 
   return (
     <AppBarBase
+      classes={classes}
       styles={classes.appBar}
       position={"fixed"}
       openDrawer={props.openDrawer}
