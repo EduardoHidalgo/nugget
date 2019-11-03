@@ -1,6 +1,10 @@
-import React, { useState, cloneElement, useEffect, Fragment } from "react";
+import React, { useState, cloneElement, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useTheme } from "@material-ui/core/styles";
+import {
+  useTheme,
+  createMuiTheme,
+  ThemeProvider
+} from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import PersistentDashboard from "../high/dashboard/PersistentDashboard";
 import PermanentDashboard from "../high/dashboard/PermanentDashboard";
@@ -9,7 +13,11 @@ import MobileDashboard from "../high/dashboard/MobileDashboard";
 import { Hidden } from "@material-ui/core";
 
 export default function DashboardBase(props) {
-  const theme = useTheme();
+  /* Provee la capa de estilos en caso que se pasen via props */
+  let theme;
+  if (props.theme) theme = createMuiTheme(props.theme);
+  else theme = useTheme();
+
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [type, setType] = useState(isMobile ? "mobile" : props.type);
@@ -163,14 +171,18 @@ export default function DashboardBase(props) {
   /* Los hidden ayudan al primer render en mobile. Después del primer render
   el hook "useMediaQuery" se encarga de calcular el breakpoint */
   return (
-    <Fragment>
+    <ThemeProvider theme={theme}>
       <Hidden smDown>{GetDashboard()}</Hidden>
       <Hidden mdUp>{mobileDashboard}</Hidden>
-    </Fragment>
+    </ThemeProvider>
   );
 }
 
 DashboardBase.propTypes = {
+  theme: PropTypes.shape({
+    appBar: PropTypes.object,
+    appBarTitle: PropTypes.object
+  }),
   type: PropTypes.oneOf(["permanent", "persistent", "temporary", "mobile"]),
   enableElevation: PropTypes.bool,
   enableHide: PropTypes.bool,

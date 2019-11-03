@@ -11,7 +11,8 @@ const useStyles = makeStyles(theme => ({
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
+    ...theme.appBar
   },
   appBarShift: {
     width: props => `calc(100% - ${props.drawerWidth}px)`,
@@ -20,6 +21,9 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen
     })
+  },
+  appBarTitle: {
+    ...theme.appBarTitle
   },
   menuButton: {
     marginRight: theme.spacing(1)
@@ -34,6 +38,7 @@ export default function ToogleAppBar(props) {
 
   return (
     <AppBarBase
+      classes={classes}
       styles={clsx(classes.appBar, {
         [classes.appBarShift]: props.openDrawer
       })}

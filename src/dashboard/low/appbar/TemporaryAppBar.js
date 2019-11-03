@@ -6,8 +6,14 @@ import { IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    ...theme.appBar
+  },
   appBar: {
     marginLeft: props => +props.drawerWidth
+  },
+  appBarTitle: {
+    ...theme.appBarTitle
   },
   menuButton: {
     marginRight: theme.spacing(1)
@@ -19,7 +25,7 @@ export default function TemporaryAppBar(props) {
 
   return (
     <AppBarBase
-      styles={classes.AppBar}
+      classes={classes}
       position={"fixed"}
       title={props.title}
       openDrawer={props.openDrawer}
