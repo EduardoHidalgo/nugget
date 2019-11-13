@@ -7,10 +7,16 @@ import DrawerMenuBase from "./DrawerMenuBase";
 const useStyles = makeStyles(theme => ({
   root: {},
   drawer: {},
-  drawerPaper: {},
+  drawerPaper: {
+    /* Fix de separación innecesaria en drawer. mantener. */
+    borderRight: "none !important"
+  },
   drawerHeader: {},
   privateSwippeableArea: {
     zIndex: "1099 !important"
+  },
+  paperAnchorDockedLeft: {
+    borderRight: "none !important"
   }
 }));
 
