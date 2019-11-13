@@ -29,6 +29,7 @@
     "rename-pkg": "rename nugget-ui-%npm_package_version%.tgz nugget.tgz",
     "version-pkg": "echo nugget-ui-%npm_package_version%.tgz",
     "prepare": "",
+    "publish": "npm publish",
     "update:patch": "npm version patch",
     "update:minor": "npm version minor",
     "update:major": "npm version major",
