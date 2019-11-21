@@ -1,8 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { Theme, makeStyles } from "@material-ui/core/styles";
+import { Children } from "src/Children";
 
-const useStyles = makeStyles(theme => ({
+interface Props {
+  children: Children;
+}
+
+const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
@@ -11,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar
 }));
 
-export default function MobileModule(props) {
+export default function MobileModule(props: Props) {
   const classes = useStyles(props);
 
   return (

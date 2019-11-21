@@ -4,8 +4,16 @@ import PermanentModule from "./PermanentModule";
 import PersistentModule from "./PersistentModule";
 import MobileModule from "./MobileModule";
 import ContainerBase from "../../../common/ContainerBase";
+import { Children } from "src/Children";
 
-export default function Module(props) {
+interface Props {
+  moduleType?: "permanent" | "persistent" | "temporary" | "mobile";
+  drawerWidth: number;
+  openDrawer: boolean;
+  children: Children;
+}
+
+export default function Module(props: Props) {
   const { moduleType, drawerWidth, openDrawer, children } = props;
 
   switch (moduleType) {
@@ -20,13 +28,13 @@ export default function Module(props) {
     case "temporary":
       return <PermanentModule>{children}</PermanentModule>;
     case "mobile":
-      return <MobileModule>{children}</MobileModule>;
+      return <MobileModule>{children as any}</MobileModule>;
     default:
-      return <ContainerBase>{children}</ContainerBase>;
+      return <ContainerBase>{children as any}</ContainerBase>;
   }
 }
 
-PersistentModule.propTypes = {
+Module.propTypes = {
   moduleType: PropTypes.oneOf([
     "permanent",
     "persistent",

@@ -1,9 +1,16 @@
 import React from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { Theme, makeStyles } from "@material-ui/core/styles";
+import { Children } from "src/Children";
 
-const useStyles = makeStyles(theme => ({
+interface Props {
+  drawerWidth: number;
+  openDrawer: boolean;
+  children: Children;
+}
+
+const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -29,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PersistentModule(props) {
+export default function PersistentModule(props: Props) {
   const classes = useStyles(props);
 
   return (
