@@ -21,21 +21,23 @@
     "dist"
   ],
   "scripts": {
-    "build": "babel src -d dist",
-    "dev": "nodemon -w src --exec npm run package:win",
-    "copy-nugget:win": "npm run build && xcopy dist ..\\wings\\node_modules\\nugget-ui\\dist /Y /F /S /E /I",
-    "package:win": "npm run delete-pkg && npm run build && npm pack && npm run rename-pkg",
+    "babel-build": "babel build -d dist",
+    "ts-build": "tsc --build tsconfig.json",
+    "build": "npm run ts-build && npm run babel-build",
+    "del-builds": "rmdir /S /Q build && rmdir /S /Q dist",
+    "package": "npm pack && npm run rename-pkg",
     "delete-pkg": "del nugget.tgz && del nugget-ui-%npm_package_version%.tgz",
     "rename-pkg": "rename nugget-ui-%npm_package_version%.tgz nugget.tgz",
     "version-pkg": "echo nugget-ui-%npm_package_version%.tgz",
-    "prepare": "",
-    "publish": "npm publish",
+    "package:win": "npm run delete-pkg && npm run build && npm run package",
+    "lint-init": "./node_modules/.bin/eslint --init",
+    "lint": "./node_modules/.bin/eslint --config ./.eslintrc.json src/**",
+    "lint-fix": "./node_modules/.bin/eslint --config ./.eslintrc.json src/** --fix",
     "update:patch": "npm version patch",
     "update:minor": "npm version minor",
     "update:major": "npm version major",
-    "lint-init": "./node_modules/.bin/eslint --init",
-    "lint": "./node_modules/.bin/eslint --config ./.eslintrc.json src/**",
-    "lint-fix": "./node_modules/.bin/eslint --config ./.eslintrc.json src/** --fix"
+    "prepare": "",
+    "publish": "npm publish"
   },
   "devDependencies": {
     "@babel/cli": "7.7.0",
@@ -46,20 +48,22 @@
     "@material-ui/core": "4.6.1",
     "@material-ui/icons": "4.5.1",
     "@material-ui/styles": "4.6.0",
+    "@types/material-ui": "^0.21.7",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.4",
     "babel-eslint": "10.0.3",
     "babel-loader": "8.0.6",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
     "eslint": "6.6.0",
     "eslint-plugin-react": "7.16.0",
-    "eslint-plugin-react-hooks": "2.3.0"
+    "eslint-plugin-react-hooks": "2.3.0",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
   },
   "peerDependencies": {
     "@material-ui/core": "4.6.1",
     "react": "16.12.0"
   },
   "dependencies": {
-    "classnames": "2.2.6",
     "clsx": "^1.0.4",
     "prop-types": "15.7.2"
   }
