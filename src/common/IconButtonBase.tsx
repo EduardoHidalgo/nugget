@@ -4,13 +4,23 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { IconButton } from "@material-ui/core";
 
+interface Props {
+  classes?: object;
+  disabled?: boolean;
+  disableFocusRipple?: boolean;
+  disableRipple?: boolean;
+  edge?: "start" | "end" | false;
+  size?: "small" | "medium";
+  children: JSX.Element;
+}
+
 const useStyles = makeStyles(theme => ({
   iconButton: {
     margin: theme.spacing(1)
   }
 }));
 
-export default function IconButtonBase() {
+export default function IconButtonBase(props: Props) {
   const classes = useStyles();
 
   return (

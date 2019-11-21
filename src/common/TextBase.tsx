@@ -2,6 +2,34 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Typography } from "@material-ui/core";
 
+interface Props {
+  styles?: string;
+  classes?: object;
+  align?: "inherit" | "left" | "center" | "right" | "justify";
+  component?: React.ElementType<React.HTMLAttributes<HTMLElement>>;
+  display?: "inline" | "initial" | "block";
+  gutterBottom?: boolean;
+  noWrap?: boolean;
+  paragraph?: boolean;
+  variant?:
+    | "h1"
+    | "h2"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "h6"
+    | "subtitle1"
+    | "subtitle2"
+    | "body1"
+    | "body2"
+    | "caption"
+    | "button"
+    | "overline"
+    | "srOnly"
+    | "inherit";
+  children: JSX.Element[] | JSX.Element | string;
+}
+
 /** TextBase. It serve as base of all texts. Provide and expose the Material-UI
  * Typography component to build Low components derivated from.
  *
@@ -15,7 +43,7 @@ import { Typography } from "@material-ui/core";
  * @param {string} [variant] Applies the theme typography styles.
  * @param {element|element[]} children elements rendered inside TwxtBase.
  */
-export default function TextBase(props) {
+export default function TextBase(props: Props) {
   return (
     <Typography
       className={props.styles}

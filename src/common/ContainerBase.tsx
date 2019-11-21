@@ -2,7 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Container } from "@material-ui/core";
 
-export default function ContainerBase(props) {
+interface Props {
+  classes?: object;
+  maxWidth?: false | "xs" | "sm" | "md" | "lg" | "xl";
+  fixed?: boolean;
+  children?: JSX.Element[] | JSX.Element | string;
+}
+
+export default function ContainerBase(props: Props) {
   return (
     <Container
       maxWidth={props.maxWidth}
