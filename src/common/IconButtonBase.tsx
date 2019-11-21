@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { IconButton } from "@material-ui/core";
 import { MaterialBase } from "src/MaterialBase";
+import { Children } from "src/Children";
 
 interface Props extends MaterialBase {
   disabled?: boolean;
@@ -11,7 +12,7 @@ interface Props extends MaterialBase {
   disableRipple?: boolean;
   edge?: "start" | "end" | false;
   size?: "small" | "medium";
-  children: JSX.Element;
+  children: Children;
 }
 
 const useStyles = makeStyles(theme => ({

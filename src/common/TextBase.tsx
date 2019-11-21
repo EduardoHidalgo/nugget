@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Typography } from "@material-ui/core";
 import { MaterialBase } from "src/MaterialBase";
+import { Children } from "src/Children";
 
 interface Props extends MaterialBase {
   align?: "inherit" | "left" | "center" | "right" | "justify";
@@ -26,7 +27,7 @@ interface Props extends MaterialBase {
     | "overline"
     | "srOnly"
     | "inherit";
-  children: JSX.Element[] | JSX.Element | string;
+  children: Children;
 }
 
 /** TextBase. It serve as base of all texts. Provide and expose the Material-UI

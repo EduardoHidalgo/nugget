@@ -2,11 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Container } from "@material-ui/core";
 import { MaterialBase } from "src/MaterialBase";
+import { Children } from "src/Children";
 
 interface Props extends MaterialBase {
   maxWidth?: false | "xs" | "sm" | "md" | "lg" | "xl";
   fixed?: boolean;
-  children?: JSX.Element[] | JSX.Element | string;
+  children?: Children;
 }
 
 export default function ContainerBase(props: Props) {

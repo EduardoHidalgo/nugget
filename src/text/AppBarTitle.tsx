@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextBase from "../common/TextBase";
 import { MaterialBase } from "src/MaterialBase";
+import { Children } from "src/Children";
 
 interface Props extends MaterialBase {
-  children?: JSX.Element[] | JSX.Element | string;
+  children?: Children;
 }
 
 export default function AppBarTitle(props: Props) {
