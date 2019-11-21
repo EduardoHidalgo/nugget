@@ -7,7 +7,7 @@ export { default as Module } from "./dashboard/low/module/Module";
 
 export { default as Container } from "./common/ContainerBase";
 export { default as IconButton } from "./common/IconButtonBase";
-export { default as Paper } from "./common/ContainerBase";
+export { default as Paper } from "./common/PaperBase";
 export { default as Text } from "./common/TextBase";
 
 /* --- UTILS --- */
