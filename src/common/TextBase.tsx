@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Typography } from "@material-ui/core";
+import { MaterialBase } from "src/MaterialBase";
 
-interface Props {
-  styles?: string;
-  classes?: object;
+interface Props extends MaterialBase {
   align?: "inherit" | "left" | "center" | "right" | "justify";
   component?: React.ElementType<React.HTMLAttributes<HTMLElement>>;
   display?: "inline" | "initial" | "block";

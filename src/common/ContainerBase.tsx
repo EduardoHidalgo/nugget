@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Container } from "@material-ui/core";
+import { MaterialBase } from "src/MaterialBase";
 
-interface Props {
-  classes?: object;
+interface Props extends MaterialBase {
   maxWidth?: false | "xs" | "sm" | "md" | "lg" | "xl";
   fixed?: boolean;
   children?: JSX.Element[] | JSX.Element | string;

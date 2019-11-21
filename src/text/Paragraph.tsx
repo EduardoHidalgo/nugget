@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import TextBase from "../common/TextBase";
 import { MaterialBase } from "src/MaterialBase";
 
-export default function Paragraph(props: MaterialBase) {
+interface Props extends MaterialBase {
+  children?: JSX.Element[] | JSX.Element | string;
+}
+
+export default function Paragraph(props: Props) {
   return <TextBase component="p">{props.children}</TextBase>;
 }
 
