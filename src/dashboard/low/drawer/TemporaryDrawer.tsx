@@ -1,9 +1,23 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import PropTypes, { string, ReactNodeArray } from "prop-types";
+import { Theme, makeStyles } from "@material-ui/core/styles";
 import DrawerBase from "../../base/DrawerBase";
+import { Children } from "src/Children";
 
-const useStyles = makeStyles(theme => ({
+interface Props {
+  drawerWidth: number;
+  openDrawer: boolean;
+  handleModule: () => void;
+  handleCloseDrawer: () => void;
+  handleOpenDrawer: () => void;
+  swippeable?: boolean;
+  keys: Array<string>;
+  titles: Array<string>;
+  icons: Array<React.ReactElement>;
+  children: Children;
+}
+
+const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
   root: {
     display: "flex"
   },
@@ -16,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function TemporaryDrawer(props) {
+export default function TemporaryDrawer(props: Props) {
   const classes = useStyles(props);
 
   return (
@@ -42,8 +56,8 @@ TemporaryDrawer.propTypes = {
   swippleable: PropTypes.bool,
 
   /* Deep props */
-  keys: PropTypes.arrayOf(String).isRequired,
-  titles: PropTypes.arrayOf(String).isRequired,
+  keys: PropTypes.arrayOf(string).isRequired,
+  titles: PropTypes.arrayOf(string).isRequired,
   icons: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

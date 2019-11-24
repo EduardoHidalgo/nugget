@@ -1,3 +1,9 @@
 export interface Children {
-  children: JSX.Element[] | JSX.Element | React.ReactNode | string;
+  children?:
+    | JSX.Element[]
+    | JSX.Element
+    | React.ReactNode
+    | React.ReactElement
+    | Element
+    | string;
 }

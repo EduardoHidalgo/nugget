@@ -27,7 +27,7 @@ interface Props extends MaterialBase {
     | "overline"
     | "srOnly"
     | "inherit";
-  children: Children;
+  children?: string;
 }
 
 /** TextBase. It serve as base of all texts. Provide and expose the Material-UI
@@ -86,5 +86,5 @@ TextBase.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ]).isRequired
+  ])
 };

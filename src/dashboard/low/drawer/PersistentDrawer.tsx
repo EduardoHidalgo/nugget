@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { Theme, makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import DrawerBase from "../../base/DrawerBase";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
   drawer: {
     width: props => +props.drawerWidth,
     flexShrink: 0
@@ -22,7 +22,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PersistentDrawer(props) {
+interface Props {
+  drawerWidth: number;
+  openDrawer: boolean;
+  keys: Array<string>;
+  titles: Array<string>;
+  icons: Array<React.ReactElement>;
+  handleOpenDrawer: () => void;
+  handleModule: (key?: string) => void;
+}
+
+export default function PersistentDrawer(props: Props) {
   const classes = useStyles(props);
 
   return (

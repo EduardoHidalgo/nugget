@@ -1,10 +1,12 @@
 import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { Theme, makeStyles } from "@material-ui/core/styles";
 import { Drawer, SwipeableDrawer } from "@material-ui/core";
 import DrawerMenuBase from "./DrawerMenuBase";
+import { Children } from "src/Children";
+import { MaterialBase } from "src/MaterialBase";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
   root: {},
   drawer: {},
   drawerPaper: {
@@ -13,14 +15,14 @@ const useStyles = makeStyles(theme => ({
   },
   drawerHeader: {},
   privateSwippeableArea: {
-    zIndex: "1099 !important"
+    zIndex: 1099
   },
   paperAnchorDockedLeft: {
     borderRight: "none !important"
   }
 }));
 
-const useDefaultStyles = makeStyles(theme => ({
+const useDefaultStyles = makeStyles<Theme, Props>((theme: Theme) => ({
   drawer: {
     width: 240,
     flexShrink: 0
@@ -31,29 +33,41 @@ const useDefaultStyles = makeStyles(theme => ({
   }
 }));
 
-export default function DrawerBase(props) {
+interface Props extends MaterialBase, Children {
+  type: "permanent" | "persistent" | "temporary" | "mobile";
+  anchor: "left" | "top" | "right" | "bottom";
+  openDrawer?: boolean;
+  handleCloseDrawer?: () => void;
+  handleOpenDrawer?: () => void;
+  handleModule: (key?: string) => void;
+  keys: Array<string>;
+  titles: Array<string>;
+  icons: Array<React.ReactElement>;
+}
+
+export default function DrawerBase(props: Props) {
   const classes =
     props.type == null ? useDefaultStyles(props) : useStyles(props);
 
-  const [variant, setVariant] = useState(props.variant);
+  const [type, setType] = useState(props.type);
   const [anchor, setAnchor] = useState(props.anchor);
 
   useEffect(() => {
-    switch (props.type) {
+    switch (type) {
       case "permanent":
-        setVariant("permanent");
+        setType("permanent");
         break;
       case "persistent":
-        setVariant("persistent");
+        setType("persistent");
         break;
       case "temporary":
-        setVariant("temporary");
+        setType("temporary");
         break;
       case "mobile":
-        setVariant("mobile");
+        setType("mobile");
         break;
       default:
-        setVariant("permanent");
+        setType("permanent");
         break;
     }
   }, []);
@@ -62,11 +76,11 @@ export default function DrawerBase(props) {
     <Fragment>
       {props.children}
       <DrawerMenuBase
-        type={props.type}
+        type={type}
         keys={props.keys}
         titles={props.titles}
         icons={props.icons}
-        handleModule={props.handleModule ? props.handleModule : null}
+        handleModule={props.handleModule}
       />
     </Fragment>
   );
@@ -74,7 +88,7 @@ export default function DrawerBase(props) {
   const drawer = (
     <Drawer
       className={classes.drawer}
-      variant={variant}
+      variant={type == "mobile" ? undefined : type}
       classes={{
         paper: classes.drawerPaper
       }}
@@ -94,13 +108,21 @@ export default function DrawerBase(props) {
   cuando se está en versiones desktop (dado que en esa versión no se entrega el prop
   "handleCloseDrawer"). */
   const swipeableDrawer =
-    variant == "mobile" ? (
+    type == "mobile" ? (
       <SwipeableDrawer
         className={classes.drawer}
         SwipeAreaProps={{ className: classes.privateSwippeableArea }}
-        open={props.openDrawer}
-        onClose={props.handleCloseDrawer}
-        onOpen={props.handleOpenDrawer}
+        open={props.openDrawer == undefined ? false : props.openDrawer}
+        onClose={
+          props.handleCloseDrawer == undefined
+            ? () => {}
+            : props.handleCloseDrawer
+        }
+        onOpen={
+          props.handleOpenDrawer == undefined
+            ? () => {}
+            : props.handleOpenDrawer
+        }
         onKeyDown={props.handleCloseDrawer}
         onClick={props.handleCloseDrawer}
         ModalProps={{
@@ -114,7 +136,7 @@ export default function DrawerBase(props) {
       </SwipeableDrawer>
     ) : null;
 
-  return variant != "mobile" ? drawer : swipeableDrawer;
+  return type != "mobile" ? drawer : swipeableDrawer;
 }
 
 DrawerBase.defaultProps = {
@@ -124,7 +146,6 @@ DrawerBase.defaultProps = {
 DrawerBase.propTypes = {
   /* DrawerBase props */
   type: PropTypes.oneOf(["permanent", "persistent", "temporary", "mobile"]),
-  anchor: PropTypes.oneOf(["left"]),
   openDrawer: PropTypes.bool,
   handleCloseDrawer: PropTypes.func,
   children: PropTypes.oneOfType([
@@ -139,6 +160,9 @@ DrawerBase.propTypes = {
   /* Deep props */
   keys: PropTypes.array.isRequired,
   titles: PropTypes.array.isRequired,
-  icons: PropTypes.array.isRequired,
+  icons: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired,
   handleModule: PropTypes.func.isRequired
 };

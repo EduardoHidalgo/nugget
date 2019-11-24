@@ -3,9 +3,17 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { useScrollTrigger, Slide, AppBar, Toolbar } from "@material-ui/core";
 import AppBarTitle from "../../text/AppBarTitle";
+import { Children } from "src/Children";
+import { MaterialBase } from "../../MaterialBase";
+
+interface ElevationScrollProps {
+  window?: any;
+  enableElevation: boolean;
+  children: React.ReactElement;
+}
 
 /* Componente para la animación de Elevación en AppBar */
-function ElevationScroll(props) {
+function ElevationScroll(props: ElevationScrollProps) {
   const { children, window, enableElevation } = props;
 
   const trigger = useScrollTrigger({
@@ -14,14 +22,23 @@ function ElevationScroll(props) {
     target: window ? window() : undefined
   });
 
-  return React.cloneElement(children, {
+  //ReactElement<{ enableElevation: boolean; elevation: number; }
+  return React.cloneElement(children as React.ReactElement<any>, {
     enableElevation: enableElevation,
     elevation: trigger ? 4 : 0
   });
 }
 
+interface HideOnScrollProps {
+  window?: any;
+  enableElevation?: boolean;
+  enableHide: boolean;
+  elevation?: number;
+  children: React.ReactElement;
+}
+
 /* Componente para la animación de HideOnScroll en AppBar */
-function HideOnScroll(props) {
+function HideOnScroll(props: HideOnScrollProps) {
   const { children, window, enableHide, enableElevation, elevation } = props;
 
   const trigger = useScrollTrigger({
@@ -53,7 +70,17 @@ function HideOnScroll(props) {
     : originalComponent;
 }
 
-export default function AppBarBase(props) {
+interface Props extends MaterialBase {
+  classes: { appBar: any; root: any; appBarTitle: any };
+  title: string;
+  position?: "static" | "absolute" | "fixed" | "relative" | "sticky";
+  enableElevation: boolean;
+  enableHide: boolean;
+  elevation: number;
+  children: Children;
+}
+
+export default function AppBarBase(props: Props) {
   const { classes } = props;
   const [enableElevation] = useState(props.enableElevation);
   const [enableHide, setEnableHide] = useState(props.enableHide);

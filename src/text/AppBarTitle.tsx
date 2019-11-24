@@ -5,7 +5,7 @@ import { MaterialBase } from "src/MaterialBase";
 import { Children } from "src/Children";
 
 interface Props extends MaterialBase {
-  children?: Children;
+  children?: string;
 }
 
 export default function AppBarTitle(props: Props) {
@@ -13,7 +13,7 @@ export default function AppBarTitle(props: Props) {
 
   return (
     <TextBase variant="h6" noWrap styles={styles}>
-      {children}
+      {props.children}
     </TextBase>
   );
 }
