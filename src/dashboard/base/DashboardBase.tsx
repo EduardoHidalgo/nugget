@@ -20,7 +20,6 @@ interface Props {
   title: string;
   enableHide: boolean;
   enableElevation: boolean;
-  // children?: React.Component<ModuleProps>[];
   children?: React.ReactElement<ModuleProps>[];
 }
 
@@ -49,7 +48,7 @@ export default function DashboardBase(props: Props) {
     React.Children.map(children, m => m.key);
 
   let modules = InyectModules();
-  const [moduleIndex, setModuleIndex] = useState<any>(0);
+  const [moduleIndex, setModuleIndex] = useState<number>(0);
 
   /* Maneja el estado del botón del drawer para abrirlo y cerrarlo */
   const HandleOpenDrawer = () => setOpenDrawer(!openDrawer);
@@ -64,7 +63,7 @@ export default function DashboardBase(props: Props) {
 
     (modules: React.ReactElement<InyectedModuleProps>[]) =>
       React.Children.map(modules, (m, i) => {
-        if (m.key == key) {
+        if (m.props.key == key) {
           index = i;
 
           if (index != null) setModuleIndex(index);
@@ -78,7 +77,7 @@ export default function DashboardBase(props: Props) {
   /* Mapea cada módulo del dashboard y le inyecta props específicos
   según el tipo de dashboard rendereado */
   function InyectModules() {
-    return (children: Array<React.ReactElement<InyectedModuleProps>>) =>
+    return (children: Array<React.ReactElement<ModuleProps>>) =>
       React.Children.map(children, m => {
         switch (type) {
           case "permanent":
@@ -119,7 +118,11 @@ export default function DashboardBase(props: Props) {
       enableHide={props.enableHide}
       enableElevation={props.enableElevation}
     >
-      {modules != null ? modules[moduleIndex] : null}
+      {modules != null
+        ? (modules: React.ReactElement<InyectedModuleProps>[]) => {
+            modules[moduleIndex];
+          }
+        : null}
     </PermanentDashboard>
   );
 
@@ -135,7 +138,11 @@ export default function DashboardBase(props: Props) {
       enableHide={props.enableHide}
       enableElevation={props.enableElevation}
     >
-      {modules != null ? modules[moduleIndex] : null}
+      {modules != null
+        ? (modules: React.ReactElement<InyectedModuleProps>[]) => {
+            modules[moduleIndex];
+          }
+        : null}
     </PersistentDashboard>
   );
 
@@ -151,7 +158,11 @@ export default function DashboardBase(props: Props) {
       enableHide={props.enableHide}
       enableElevation={props.enableElevation}
     >
-      {modules != null ? modules[moduleIndex] : null}
+      {modules != null
+        ? (modules: React.ReactElement<InyectedModuleProps>[]) => {
+            modules[moduleIndex];
+          }
+        : null}
     </TemporaryDashboard>
   );
 
@@ -164,7 +175,11 @@ export default function DashboardBase(props: Props) {
       icons={icons}
       handleModule={HandleModule}
     >
-      {modules != null ? modules[moduleIndex] : null}
+      {modules != null
+        ? (modules: React.ReactElement<InyectedModuleProps>[]) => {
+            modules[moduleIndex];
+          }
+        : null}
     </MobileDashboard>
   );
 
