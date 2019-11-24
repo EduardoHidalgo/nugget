@@ -4,16 +4,9 @@ import PermanentModule from "./PermanentModule";
 import PersistentModule from "./PersistentModule";
 import MobileModule from "./MobileModule";
 import ContainerBase from "../../../common/ContainerBase";
-import { Children } from "src/Children";
+import { InyectedModuleProps } from "./InyectedModuleProps";
 
-interface Props {
-  moduleType?: "permanent" | "persistent" | "temporary" | "mobile";
-  drawerWidth: number;
-  openDrawer: boolean;
-  children: Children;
-}
-
-export default function Module(props: Props) {
+export default function Module(props: InyectedModuleProps) {
   const { moduleType, drawerWidth, openDrawer, children } = props;
 
   switch (moduleType) {
