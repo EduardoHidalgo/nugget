@@ -20,7 +20,7 @@ interface Props {
   title: string;
   enableHide: boolean;
   enableElevation: boolean;
-  children?: React.ReactElement<ModuleProps>[];
+  children: React.ReactElement<ModuleProps>[];
 }
 
 export default function DashboardBase(props: Props) {
@@ -32,26 +32,18 @@ export default function DashboardBase(props: Props) {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [type, setType] = useState(isMobile ? "mobile" : props.type);
-
-  useEffect(() => {
-    if (isMobile) setType("mobile");
-    else setType(props.type);
-  }, [isMobile]);
-
   const [openDrawer, setOpenDrawer] = useState(false);
 
   let keys: Array<string> = [];
   let titles: Array<string> = [];
   let icons: Array<React.ReactElement> = [];
 
-  (children: React.ReactElement<ModuleProps>[]) => {
-    children.forEach(m => {
-      keys.push(m.props.key as string);
-      titles.push(m.props.title as string);
-      icons.push(m.props.icon as React.ReactElement);
-    });
-  };
+  useEffect(() => {
+    if (isMobile) setType("mobile");
+    else setType(props.type);
+  }, [isMobile]);
 
+  ExtractModulesProps(props.children);
   let modules = InyectModules();
   const [moduleIndex, setModuleIndex] = useState<number>(0);
 
@@ -78,6 +70,14 @@ export default function DashboardBase(props: Props) {
     if (index == null)
       console.error("moduleIndex was null and module was not found.");
   };
+
+  function ExtractModulesProps(children: React.ReactElement<ModuleProps>[]) {
+    children.forEach(m => {
+      keys.push(m.props.key as string);
+      titles.push(m.props.title as string);
+      icons.push(m.props.icon as React.ReactElement);
+    });
+  }
 
   /* Mapea cada módulo del dashboard y le inyecta props específicos
   según el tipo de dashboard rendereado */
