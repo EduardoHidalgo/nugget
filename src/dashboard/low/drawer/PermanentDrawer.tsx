@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import DrawerBase from "../../base/DrawerBase";
+import { DrawerBaseProps } from "../../base/DrawerBaseProps";
 
-const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, PermanentDrawerProps>(() => ({
   root: {
     display: "flex"
   },
@@ -16,17 +17,11 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
   }
 }));
 
-interface Props {
+interface PermanentDrawerProps extends DrawerBaseProps {
   drawerWidth: number;
-  openDrawer: boolean;
-  keys: Array<string>;
-  titles: Array<string>;
-  icons: Array<React.ReactElement>;
-  handleOpenDrawer: () => void;
-  handleModule: (key?: string) => void;
 }
 
-export default function PermanentDrawer(props: Props) {
+export default function PermanentDrawer(props: PermanentDrawerProps) {
   const classes = useStyles(props);
 
   return <DrawerBase classes={classes} type={"permanent"} {...props} />;
@@ -37,12 +32,28 @@ PermanentDrawer.defaultProps = {
 };
 
 PermanentDrawer.propTypes = {
-  /* PermanentDrawer props */
   drawerWidth: PropTypes.number,
 
-  /* Deep props */
+  classes: PropTypes.object,
+  styles: PropTypes.string,
+
+  type: PropTypes.oneOf(["permanent", "persistent", "temporary", "mobile"]),
+  anchor: PropTypes.oneOf(["left", "top", "right", "bottom"]),
+
+  openDrawer: PropTypes.bool,
+  handleOpenDrawer: PropTypes.func,
+  handleCloseDrawer: PropTypes.func,
+  handleModule: PropTypes.func.isRequired,
+
   keys: PropTypes.array.isRequired,
   titles: PropTypes.array.isRequired,
-  icons: PropTypes.array.isRequired,
-  handleModule: PropTypes.func.isRequired
+  icons: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired,
+
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ])
 };

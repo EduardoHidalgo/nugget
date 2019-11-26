@@ -8,25 +8,16 @@ import {
   ListItemText,
   Divider
 } from "@material-ui/core";
+import { DrawerType } from "./DrawerType";
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   toolbar: theme.mixins.toolbar
 }));
 
-interface Props {
-  type: "permanent" | "persistent" | "temporary" | "mobile";
-  keys: Array<string>;
-  titles: Array<string>;
-  icons: Array<React.ReactElement>;
-  handleModule: (key?: string) => void;
-}
-
-export default function DrawerMenuBase(props: Props) {
+export default function DrawerMenuBase(props: DrawerType) {
   const classes = useStyles();
 
-  const titles = props.titles;
-  const icons = props.icons;
-  const keys = props.keys;
+  const { titles, icons, keys } = props;
 
   /* Manda la variable "key" para indicar que módulo fué seleccionado */
   const HandleClick = (key?: string) => props.handleModule(key);
@@ -38,14 +29,14 @@ export default function DrawerMenuBase(props: Props) {
       <Divider />
       <List dense disablePadding>
         {/* Mapea los módulos recibidos en el drawer */}
-        {titles.map((text, index) => (
+        {titles.map((title: string, index: number) => (
           <ListItem
             button
             key={keys[index]}
             onClick={() => HandleClick(keys[index])}
           >
             <ListItemIcon>{icons[index]}</ListItemIcon>
-            <ListItemText disableTypography>{text}</ListItemText>
+            <ListItemText disableTypography>{title}</ListItemText>
           </ListItem>
         ))}
       </List>
@@ -54,7 +45,7 @@ export default function DrawerMenuBase(props: Props) {
 }
 
 DrawerMenuBase.propTypes = {
-  type: PropTypes.string,
+  type: PropTypes.string.isRequired,
   keys: PropTypes.array.isRequired,
   titles: PropTypes.array.isRequired,
   icons: PropTypes.arrayOf(PropTypes.element).isRequired,

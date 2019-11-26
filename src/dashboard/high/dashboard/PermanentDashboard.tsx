@@ -1,16 +1,27 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import PropTypes, { string } from "prop-types";
+import { Theme, makeStyles } from "@material-ui/core/styles";
 import PermanentAppBar from "../../low/appbar/PermanentAppBar";
 import PermanentDrawer from "../../low/drawer/PermanentDrawer";
+import { Children } from "src/Children";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
     display: "flex"
   }
 }));
 
-export default function PermanentDashboard(props) {
+interface Props extends Children {
+  title: string;
+  enableHide: boolean;
+  enableElevation: boolean;
+  keys: Array<string>;
+  titles: Array<string>;
+  icons: Array<React.ReactElement>;
+  handleModule: (key?: string) => void;
+}
+
+export default function PermanentDashboard(props: Props) {
   const classes = useStyles();
 
   return (
@@ -26,6 +37,8 @@ export default function PermanentDashboard(props) {
         titles={props.titles}
         icons={props.icons}
         handleModule={props.handleModule}
+        handleOpenDrawer={() => {}}
+        openDrawer={false}
         drawerWidth={240}
       />
       {props.children}
@@ -42,8 +55,8 @@ PermanentDashboard.propTypes = {
   handleModule: PropTypes.func.isRequired,
   enableElevation: PropTypes.bool,
   enableHide: PropTypes.bool,
-  keys: PropTypes.arrayOf(String).isRequired,
-  titles: PropTypes.arrayOf(String).isRequired,
+  keys: PropTypes.arrayOf(string).isRequired,
+  titles: PropTypes.arrayOf(string).isRequired,
   icons: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

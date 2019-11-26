@@ -4,8 +4,9 @@ import { Theme, makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import DrawerBase from "../../base/DrawerBase";
+import { DrawerBaseProps } from "../../base/DrawerBaseProps";
 
-const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, PersistentDrawerProps>((theme: Theme) => ({
   drawer: {
     width: props => +props.drawerWidth,
     flexShrink: 0
@@ -22,17 +23,11 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
   }
 }));
 
-interface Props {
+interface PersistentDrawerProps extends DrawerBaseProps {
   drawerWidth: number;
-  openDrawer: boolean;
-  keys: Array<string>;
-  titles: Array<string>;
-  icons: Array<React.ReactElement>;
-  handleOpenDrawer: () => void;
-  handleModule: (key?: string) => void;
 }
 
-export default function PersistentDrawer(props: Props) {
+export default function PersistentDrawer(props: PersistentDrawerProps) {
   const classes = useStyles(props);
 
   return (
@@ -51,14 +46,28 @@ PersistentDrawer.defaultProps = {
 };
 
 PersistentDrawer.propTypes = {
-  /* PersistentDrawer props */
   drawerWidth: PropTypes.number,
-  openDrawer: PropTypes.bool.isRequired,
-  handleOpenDrawer: PropTypes.func.isRequired,
 
-  /* Deep props */
+  classes: PropTypes.object,
+  styles: PropTypes.string,
+
+  type: PropTypes.oneOf(["permanent", "persistent", "temporary", "mobile"]),
+  anchor: PropTypes.oneOf(["left", "top", "right", "bottom"]),
+
+  openDrawer: PropTypes.bool,
+  handleOpenDrawer: PropTypes.func,
+  handleCloseDrawer: PropTypes.func,
+  handleModule: PropTypes.func.isRequired,
+
   keys: PropTypes.array.isRequired,
   titles: PropTypes.array.isRequired,
-  icons: PropTypes.array.isRequired,
-  handleModule: PropTypes.func.isRequired
+  icons: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired,
+
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ])
 };

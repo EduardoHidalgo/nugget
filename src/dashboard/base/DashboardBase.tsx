@@ -40,12 +40,17 @@ export default function DashboardBase(props: Props) {
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const titles = (children: React.ReactElement<ModuleProps>) =>
-    React.Children.map(children, m => m.props.icon);
-  const icons = (children: React.ReactElement<ModuleProps>) =>
-    React.Children.map(children, m => m.props.icon);
-  const keys = (children: React.ReactElement<ModuleProps>) =>
-    React.Children.map(children, m => m.key);
+  let keys: Array<string> = [];
+  let titles: Array<string> = [];
+  let icons: Array<React.ReactElement> = [];
+
+  (children: React.ReactElement<ModuleProps>[]) => {
+    children.forEach(m => {
+      keys.push(m.props.key as string);
+      titles.push(m.props.title as string);
+      icons.push(m.props.icon as React.ReactElement);
+    });
+  };
 
   let modules = InyectModules();
   const [moduleIndex, setModuleIndex] = useState<number>(0);
@@ -58,7 +63,7 @@ export default function DashboardBase(props: Props) {
 
   /* Obtiene la key del módulo cuando sufre click dentro del drawer
   y renderea el módulo correcto a partir de esa key. */
-  const HandleModule = (key: string) => {
+  const HandleModule = (key?: string) => {
     let index: number = 0;
 
     (modules: React.ReactElement<InyectedModuleProps>[]) =>

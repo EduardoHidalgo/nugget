@@ -3,18 +3,13 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { useScrollTrigger, Slide, AppBar, Toolbar } from "@material-ui/core";
 import AppBarTitle from "../../text/AppBarTitle";
-import { Children } from "src/Children";
-import { MaterialBase } from "../../MaterialBase";
-
-interface ElevationScrollProps {
-  window?: any;
-  enableElevation: boolean;
-  children: React.ReactElement;
-}
+import { AppBarBaseProps } from "./AppBarBaseProps";
+import { ElevationScrollProps } from "./ElevationScrollProps";
+import { HideOnScrollProps } from "./HideOnScrollProps";
 
 /* Componente para la animación de Elevación en AppBar */
 function ElevationScroll(props: ElevationScrollProps) {
-  const { children, window, enableElevation } = props;
+  const { window, enableElevation, children } = props;
 
   const trigger = useScrollTrigger({
     disableHysteresis: true,
@@ -22,24 +17,15 @@ function ElevationScroll(props: ElevationScrollProps) {
     target: window ? window() : undefined
   });
 
-  //ReactElement<{ enableElevation: boolean; elevation: number; }
-  return React.cloneElement(children as React.ReactElement<any>, {
+  return React.cloneElement(children as React.ReactElement<HideOnScrollProps>, {
     enableElevation: enableElevation,
     elevation: trigger ? 4 : 0
   });
 }
 
-interface HideOnScrollProps {
-  window?: any;
-  enableElevation?: boolean;
-  enableHide: boolean;
-  elevation?: number;
-  children: React.ReactElement;
-}
-
 /* Componente para la animación de HideOnScroll en AppBar */
 function HideOnScroll(props: HideOnScrollProps) {
-  const { children, window, enableHide, enableElevation, elevation } = props;
+  const { window, enableHide, enableElevation, elevation, children } = props;
 
   const trigger = useScrollTrigger({
     target: window ? window() : undefined
@@ -53,7 +39,7 @@ function HideOnScroll(props: HideOnScrollProps) {
 
   const hideComponent = (
     <Slide appear={false} direction={"down"} in={enableHide ? !trigger : true}>
-      {React.cloneElement(children, {
+      {React.cloneElement(children as React.ReactElement<AppBarBaseProps>, {
         elevation: elevation
       })}
     </Slide>
@@ -70,21 +56,10 @@ function HideOnScroll(props: HideOnScrollProps) {
     : originalComponent;
 }
 
-interface Props extends MaterialBase {
-  classes: { appBar: any; root: any; appBarTitle: any };
-  title: string;
-  position?: "static" | "absolute" | "fixed" | "relative" | "sticky";
-  enableElevation: boolean;
-  enableHide: boolean;
-  elevation: number;
-  children: Children;
-}
-
-export default function AppBarBase(props: Props) {
-  const { classes } = props;
+export default function AppBarBase(props: AppBarBaseProps) {
+  const { classes, styles, title, position, children } = props;
   const [enableElevation] = useState(props.enableElevation);
   const [enableHide, setEnableHide] = useState(props.enableHide);
-  const title = props.title;
 
   /* Previene el uso de ambos efectos para el AppBar. El ElevationScroll tiene mayor peso
   en jerarquía que HideOnScroll dado que requiere el prop "elevation". */
@@ -102,12 +77,12 @@ export default function AppBarBase(props: Props) {
     <ElevationScroll enableElevation={enableElevation}>
       <HideOnScroll enableHide={enableHide}>
         <AppBar
-          position={props.position}
-          className={clsx(classes.appBar, props.styles)}
+          position={position}
+          className={clsx(classes.appBar, styles)}
           classes={{ root: classes.root }}
         >
           <Toolbar>
-            {props.children}
+            {children}
             {title ? (
               <AppBarTitle styles={classes.appBarTitle}>
                 {props.title}

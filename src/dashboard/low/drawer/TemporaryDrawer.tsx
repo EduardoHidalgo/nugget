@@ -1,23 +1,10 @@
 import React from "react";
-import PropTypes, { string, ReactNodeArray } from "prop-types";
+import PropTypes from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import DrawerBase from "../../base/DrawerBase";
-import { Children } from "src/Children";
+import { DrawerBaseProps } from "../../base/DrawerBaseProps";
 
-interface Props {
-  drawerWidth: number;
-  openDrawer: boolean;
-  handleModule: () => void;
-  handleCloseDrawer: () => void;
-  handleOpenDrawer: () => void;
-  swippeable?: boolean;
-  keys: Array<string>;
-  titles: Array<string>;
-  icons: Array<React.ReactElement>;
-  children: Children;
-}
-
-const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, TemporaryDrawerProps>(() => ({
   root: {
     display: "flex"
   },
@@ -30,7 +17,12 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
   }
 }));
 
-export default function TemporaryDrawer(props: Props) {
+interface TemporaryDrawerProps extends DrawerBaseProps {
+  drawerWidth: number;
+  swippeable?: boolean;
+}
+
+export default function TemporaryDrawer(props: TemporaryDrawerProps) {
   const classes = useStyles(props);
 
   return (
@@ -44,20 +36,26 @@ export default function TemporaryDrawer(props: Props) {
 
 TemporaryDrawer.defaultProps = {
   drawerWidth: 240,
-  swippleable: false
+  swippeable: false
 };
 
 TemporaryDrawer.propTypes = {
-  /* TemporaryDrawer props */
   drawerWidth: PropTypes.number,
-  openDrawer: PropTypes.bool.isRequired,
-  handleModule: PropTypes.func.isRequired,
-  handleCloseDrawer: PropTypes.func.isRequired,
-  swippleable: PropTypes.bool,
+  swippeable: PropTypes.bool,
 
-  /* Deep props */
-  keys: PropTypes.arrayOf(string).isRequired,
-  titles: PropTypes.arrayOf(string).isRequired,
+  classes: PropTypes.object,
+  styles: PropTypes.string,
+
+  type: PropTypes.oneOf(["permanent", "persistent", "temporary", "mobile"]),
+  anchor: PropTypes.oneOf(["left", "top", "right", "bottom"]),
+
+  openDrawer: PropTypes.bool,
+  handleOpenDrawer: PropTypes.func,
+  handleCloseDrawer: PropTypes.func,
+  handleModule: PropTypes.func.isRequired,
+
+  keys: PropTypes.array.isRequired,
+  titles: PropTypes.array.isRequired,
   icons: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
