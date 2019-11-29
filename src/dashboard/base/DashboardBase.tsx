@@ -156,6 +156,7 @@ export default function DashboardBase(props: Props) {
       title={props.title}
       openDrawer={openDrawer}
       handleOpenDrawer={HandleOpenDrawer}
+      handleCloseDrawer={HandleCloseDrawer}
       keys={keys}
       titles={titles}
       icons={icons}
@@ -175,6 +176,7 @@ export default function DashboardBase(props: Props) {
     <MobileDashboard
       openDrawer={openDrawer}
       handleOpenDrawer={HandleOpenDrawer}
+      handleCloseDrawer={HandleCloseDrawer}
       keys={keys}
       titles={titles}
       icons={icons}

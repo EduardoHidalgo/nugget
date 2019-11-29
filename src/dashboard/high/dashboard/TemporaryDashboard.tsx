@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-interface Props extends Children, TemporaryAppBarProps {
+interface Props extends Children {
   title: string;
   enableHide: boolean;
   enableElevation: boolean;
@@ -22,6 +22,7 @@ interface Props extends Children, TemporaryAppBarProps {
   handleModule: (key?: string) => void;
   openDrawer: boolean;
   handleCloseDrawer: () => void;
+  handleOpenDrawer: () => void;
 }
 
 export default function TemporaryDashboard(props: Props) {

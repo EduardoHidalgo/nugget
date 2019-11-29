@@ -13,9 +13,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 }));
 
 interface Props extends Children, BottomAppBarProps {
-  title: string;
-  enableHide: boolean;
-  enableElevation: boolean;
   keys: Array<string>;
   titles: Array<string>;
   icons: Array<React.ReactElement>;

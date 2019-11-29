@@ -12,7 +12,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   }
 }));
 
-interface Props extends Children, ToogleAppBarProps {
+interface Props extends Children {
   title: string;
   enableHide: boolean;
   enableElevation: boolean;
@@ -20,6 +20,9 @@ interface Props extends Children, ToogleAppBarProps {
   titles: Array<string>;
   icons: Array<React.ReactElement>;
   handleModule: (key?: string) => void;
+
+  handleOpenDrawer: () => void;
+  openDrawer: boolean;
 }
 
 export default function PersistentDashboard(props: Props) {

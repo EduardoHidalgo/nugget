@@ -4,7 +4,7 @@ import { Typography } from "@material-ui/core";
 import { MaterialBase } from "src/MaterialBase";
 import { Children } from "src/Children";
 
-interface Props extends MaterialBase {
+interface Props extends MaterialBase, Children {
   align?: "inherit" | "left" | "center" | "right" | "justify";
   component?: React.ElementType<React.HTMLAttributes<HTMLElement>>;
   display?: "inline" | "initial" | "block";
@@ -27,7 +27,6 @@ interface Props extends MaterialBase {
     | "overline"
     | "srOnly"
     | "inherit";
-  children?: string;
 }
 
 /** TextBase. It serve as base of all texts. Provide and expose the Material-UI
