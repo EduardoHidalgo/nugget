@@ -1,16 +1,28 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import PropTypes, { string } from "prop-types";
+import { Theme, makeStyles } from "@material-ui/core/styles";
 import ToogleAppBar from "../../low/appbar/ToogleAppBar";
 import PersistentDrawer from "../../low/drawer/PersistentDrawer";
+import { Children } from "src/Children";
+import { ToogleAppBarProps } from "src/dashboard/low/appbar/ToogleAppBarProps";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
     display: "flex"
   }
 }));
 
-export default function PersistentDashboard(props) {
+interface Props extends Children, ToogleAppBarProps {
+  title: string;
+  enableHide: boolean;
+  enableElevation: boolean;
+  keys: Array<string>;
+  titles: Array<string>;
+  icons: Array<React.ReactElement>;
+  handleModule: (key?: string) => void;
+}
+
+export default function PersistentDashboard(props: Props) {
   const classes = useStyles();
 
   return (
@@ -48,8 +60,8 @@ PersistentDashboard.propTypes = {
   handleOpenDrawer: PropTypes.func.isRequired,
   enableElevation: PropTypes.bool,
   enableHide: PropTypes.bool,
-  keys: PropTypes.arrayOf(String).isRequired,
-  titles: PropTypes.arrayOf(String).isRequired,
+  keys: PropTypes.arrayOf(string).isRequired,
+  titles: PropTypes.arrayOf(string).isRequired,
   icons: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
