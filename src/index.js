@@ -1,14 +1,14 @@
 /* --- DASHBOARD --- */
 
-export { default as Dashboard } from "./dashboard/base/DashboardBase";
-export { default as Module } from "./dashboard/low/module/Module";
+export { default as Dashboard } from "./components/dashboard/DashboardBase";
+export { default as Module } from "./components/module/Module";
 
 /* --- COMMON --- */
 
-export { default as Container } from "./common/ContainerBase";
-export { default as IconButton } from "./common/IconButtonBase";
-export { default as Paper } from "./common/PaperBase";
-export { default as Text } from "./common/TextBase";
+export { default as Container } from "./components/common/ContainerBase";
+export { default as IconButton } from "./components/common/IconButtonBase";
+export { default as Paper } from "./components/common/PaperBase";
+export { default as Text } from "./components/common/TextBase";
 
 /* --- UTILS --- */
 

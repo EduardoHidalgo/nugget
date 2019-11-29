@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import PaperBase from "../../common/PaperBase";
-import Paragraph from "../../text/Paragraph";
+import PaperBase from "../../components/common/PaperBase";
+import Paragraph from "../../components/text/Paragraph";
 
 const useStyles = makeStyles(theme => ({
   content: {

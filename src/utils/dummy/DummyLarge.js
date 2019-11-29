@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paragraph from "../../text/Paragraph";
+import Paragraph from "../../components/text/Paragraph";
 
 const useStyles = makeStyles(theme => ({
   content: {

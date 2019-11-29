@@ -1,6 +1,6 @@
 import React from "react";
-import PaperBase from "../../common/PaperBase";
-import Title from "../../text/Title";
+import PaperBase from "../../components/common/PaperBase";
+import Title from "../../components/text/Title";
 import Fetching from "../fetching/Fetching";
 
 function Pokemons(props) {
