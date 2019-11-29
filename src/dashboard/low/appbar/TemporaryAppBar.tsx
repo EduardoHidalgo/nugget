@@ -4,23 +4,27 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBarBase from "../../base/AppBarBase";
 import { IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import { DashboardThemeProps } from "src/dashboard/base/DashboardThemeProps";
+import { TemporaryAppBarProps } from "./TemporaryAppBarProps";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    ...theme.appBar
-  },
-  appBar: {
-    marginLeft: props => +props.drawerWidth
-  },
-  appBarTitle: {
-    ...theme.appBarTitle
-  },
-  menuButton: {
-    marginRight: theme.spacing(1)
-  }
-}));
+const useStyles = makeStyles<DashboardThemeProps, TemporaryAppBarProps>(
+  (theme: DashboardThemeProps) => ({
+    root: {
+      ...theme.appBar
+    },
+    appBar: {
+      marginLeft: props => +props.drawerWidth
+    },
+    appBarTitle: {
+      ...theme.appBarTitle
+    },
+    menuButton: {
+      marginRight: theme.spacing(1)
+    }
+  })
+);
 
-export default function TemporaryAppBar(props) {
+export default function TemporaryAppBar(props: TemporaryAppBarProps) {
   const classes = useStyles(props);
 
   return (
@@ -28,8 +32,6 @@ export default function TemporaryAppBar(props) {
       classes={classes}
       position={"fixed"}
       title={props.title}
-      openDrawer={props.openDrawer}
-      drawerWidth={props.drawerWidth}
       enableHide={props.enableHide}
       enableElevation={props.enableElevation}
     >
@@ -51,10 +53,7 @@ TemporaryAppBar.propTypes = {
   enableElevation: PropTypes.bool,
   enableHide: PropTypes.bool,
 
-  /* ToogleAppBar props */
-  openDrawer: PropTypes.bool.isRequired,
   handleOpenDrawer: PropTypes.func.isRequired,
 
-  /* AppBarBase props */
   title: PropTypes.string.isRequired
 };

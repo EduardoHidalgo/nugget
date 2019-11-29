@@ -4,25 +4,24 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBarBase from "../../base/AppBarBase";
 import { IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import { BottomAppBarProps } from "./BottomAppBarProps";
+import { DashboardThemeProps } from "src/dashboard/base/DashboardThemeProps";
 
-const useStyles = makeStyles(theme => ({
-  appBar: {
-    top: "auto",
-    bottom: 0,
-    ...theme.appBar
-  }
-}));
+const useStyles = makeStyles<DashboardThemeProps, BottomAppBarProps>(
+  (theme: DashboardThemeProps) => ({
+    appBar: {
+      top: "auto",
+      bottom: 0,
+      ...theme.appBar
+    }
+  })
+);
 
-export default function BottomAppBar(props) {
+export default function BottomAppBar(props: BottomAppBarProps) {
   const classes = useStyles(props);
 
   return (
-    <AppBarBase
-      classes={classes}
-      styles={classes.appBar}
-      position={"fixed"}
-      openDrawer={props.openDrawer}
-    >
+    <AppBarBase classes={classes} styles={classes.appBar} position={"fixed"}>
       <IconButton edge="start" color="inherit" onClick={props.handleOpenDrawer}>
         <MenuIcon />
       </IconButton>
@@ -31,7 +30,5 @@ export default function BottomAppBar(props) {
 }
 
 BottomAppBar.propTypes = {
-  /* BottomAppBar props */
-  openDrawer: PropTypes.bool.isRequired,
   handleOpenDrawer: PropTypes.func.isRequired
 };

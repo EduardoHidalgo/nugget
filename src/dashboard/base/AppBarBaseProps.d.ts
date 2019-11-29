@@ -4,7 +4,7 @@ import { HideOnScrollProps } from "./HideOnScrollProps";
 
 export interface AppBarBaseProps extends Children, MaterialBase {
   classes: Record<string, string>;
-  title: string;
+  title?: string;
   position?: "static" | "absolute" | "fixed" | "relative" | "sticky";
   enableHide?: boolean;
   elevation?: number;

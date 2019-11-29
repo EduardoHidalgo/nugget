@@ -2,7 +2,7 @@ import { Theme, createMuiTheme } from "@material-ui/core";
 import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme";
 
 declare module "@material-ui/core/styles/createMuiTheme" {
-  interface DashboardThemeProps {
+  interface DashboardThemeProps extends Theme {
     appBar?: {
       color: string;
     };
@@ -12,7 +12,7 @@ declare module "@material-ui/core/styles/createMuiTheme" {
   }
 }
 
-export interface DashboardThemeProps {
+export interface DashboardThemeProps extends Theme {
   appBar?: {
     color: string;
   };

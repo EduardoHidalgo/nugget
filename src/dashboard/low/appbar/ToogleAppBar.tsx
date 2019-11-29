@@ -5,35 +5,39 @@ import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import AppBarBase from "../../base/AppBarBase";
+import { DashboardThemeProps } from "src/dashboard/base/DashboardThemeProps";
+import { ToogleAppBarProps } from "./ToogleAppBarProps";
 
-const useStyles = makeStyles(theme => ({
-  appBar: {
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    ...theme.appBar
-  },
-  appBarShift: {
-    width: props => `calc(100% - ${props.drawerWidth}px)`,
-    marginLeft: props => +props.drawerWidth,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  appBarTitle: {
-    ...theme.appBarTitle
-  },
-  menuButton: {
-    marginRight: theme.spacing(1)
-  },
-  hide: {
-    display: "none"
-  }
-}));
+const useStyles = makeStyles<DashboardThemeProps, ToogleAppBarProps>(
+  (theme: DashboardThemeProps) => ({
+    appBar: {
+      transition: theme.transitions.create(["margin", "width"], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen
+      }),
+      ...theme.appBar
+    },
+    appBarShift: {
+      width: props => `calc(100% - ${props.drawerWidth}px)`,
+      marginLeft: props => +props.drawerWidth,
+      transition: theme.transitions.create(["margin", "width"], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen
+      })
+    },
+    appBarTitle: {
+      ...theme.appBarTitle
+    },
+    menuButton: {
+      marginRight: theme.spacing(1)
+    },
+    hide: {
+      display: "none"
+    }
+  })
+);
 
-export default function ToogleAppBar(props) {
+export default function ToogleAppBar(props: ToogleAppBarProps) {
   const classes = useStyles(props);
 
   return (
@@ -64,13 +68,12 @@ ToogleAppBar.defaultProps = {
 };
 
 ToogleAppBar.propTypes = {
-  /* ToogleAppBar props */
   drawerWidth: PropTypes.number,
   openDrawer: PropTypes.bool.isRequired,
   handleOpenDrawer: PropTypes.func.isRequired,
+
   enableHide: PropTypes.bool,
   enableElevation: PropTypes.bool,
 
-  /* AppBarBase props */
   title: PropTypes.string
 };
