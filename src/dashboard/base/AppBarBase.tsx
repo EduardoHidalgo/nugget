@@ -18,7 +18,7 @@ function ElevationScroll(props: ElevationScrollProps) {
   });
 
   return React.cloneElement(children as React.ReactElement<HideOnScrollProps>, {
-    enableElevation: enableElevation,
+    enableElevation: enableElevation != undefined ? enableElevation : false,
     elevation: trigger ? 4 : 0
   });
 }
