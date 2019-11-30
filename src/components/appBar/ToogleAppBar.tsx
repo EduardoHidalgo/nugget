@@ -5,11 +5,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import AppBarBase from "./AppBarBase";
-import { DashboardThemeProps } from "src/components/dashboard/DashboardThemeProps";
+import { DashboardTheme } from "src/types/DashboardTheme";
 import { ToogleAppBarProps } from "../../types/ToogleAppBarProps";
 
-const useStyles = makeStyles<DashboardThemeProps, ToogleAppBarProps>(
-  (theme: DashboardThemeProps) => ({
+const useStyles = makeStyles<DashboardTheme, ToogleAppBarProps>(
+  (theme: DashboardTheme) => ({
     appBar: {
       transition: theme.transitions.create(["margin", "width"], {
         easing: theme.transitions.easing.sharp,
@@ -37,14 +37,24 @@ const useStyles = makeStyles<DashboardThemeProps, ToogleAppBarProps>(
   })
 );
 
+/** Variante de AppBar: El AppBar cambia su width debido a que el drawer
+ * empuja el contenido de la vista para aparecer.
+ *
+ * @see https://material-ui.com/components/drawers/#persistent-drawer
+ *
+ * @param props TemporaryAppBarProps
+ * @returns JSX.Element
+ */
 export default function ToogleAppBar(props: ToogleAppBarProps) {
+  const { title, handleOpenDrawer, openDrawer } = props;
   const classes = useStyles(props);
 
   return (
     <AppBarBase
       classes={classes}
+      /* dependiendo del boolean "openDrawer" renderea ciertos estilos */
       styles={clsx(classes.appBar, {
-        [classes.appBarShift]: props.openDrawer
+        [classes.appBarShift]: openDrawer
       })}
       position={"fixed"}
       {...props}
@@ -52,7 +62,7 @@ export default function ToogleAppBar(props: ToogleAppBarProps) {
       <IconButton
         color="inherit"
         aria-label="open drawer"
-        onClick={props.handleOpenDrawer}
+        onClick={handleOpenDrawer}
         edge="start"
         className={clsx(classes.menuButton, props.openDrawer && classes.hide)}
       >
@@ -68,12 +78,14 @@ ToogleAppBar.defaultProps = {
 };
 
 ToogleAppBar.propTypes = {
+  classes: PropTypes.object,
   drawerWidth: PropTypes.number,
-  openDrawer: PropTypes.bool.isRequired,
-  handleOpenDrawer: PropTypes.func.isRequired,
+
+  title: PropTypes.string,
 
   enableHide: PropTypes.bool,
   enableElevation: PropTypes.bool,
 
-  title: PropTypes.string
+  openDrawer: PropTypes.bool.isRequired,
+  handleOpenDrawer: PropTypes.func.isRequired
 };

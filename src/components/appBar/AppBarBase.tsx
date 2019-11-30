@@ -1,61 +1,19 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import { useScrollTrigger, Slide, AppBar, Toolbar } from "@material-ui/core";
+import { AppBar, Toolbar } from "@material-ui/core";
 import AppBarTitle from "../text/AppBarTitle";
+import { ElevationScroll } from "./ElevationScroll";
+import { HideOnScroll } from "./HideOnScroll";
 import { AppBarBaseProps } from "../../types/AppBarBaseProps";
-import { ElevationScrollProps } from "../../types/ElevationScrollProps";
-import { HideOnScrollProps } from "../../types/HideOnScrollProps";
 
-/* Componente para la animación de Elevación en AppBar */
-function ElevationScroll(props: ElevationScrollProps) {
-  const { window, enableElevation, children } = props;
-
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 0,
-    target: window ? window() : undefined
-  });
-
-  return React.cloneElement(children as React.ReactElement<HideOnScrollProps>, {
-    enableElevation: enableElevation != undefined ? enableElevation : false,
-    elevation: trigger ? 4 : 0
-  });
-}
-
-/* Componente para la animación de HideOnScroll en AppBar */
-function HideOnScroll(props: HideOnScrollProps) {
-  const { window, enableHide, enableElevation, elevation, children } = props;
-
-  const trigger = useScrollTrigger({
-    target: window ? window() : undefined
-  });
-
-  const originalComponent = children;
-
-  const elevationComponent = React.cloneElement(children, {
-    elevation: elevation
-  });
-
-  const hideComponent = (
-    <Slide appear={false} direction={"down"} in={enableHide ? !trigger : true}>
-      {React.cloneElement(children as React.ReactElement<AppBarBaseProps>, {
-        elevation: elevation
-      })}
-    </Slide>
-  );
-
-  /* Recibe el prop "elevation" del componente ElevationScroll y lo propaga al
-  AppBar que es quien requiere dicho prop. Si "enableElevation" es true, hace el render
-  únicamente de children (dado que Slide estaría apagado y no habría AppBar). Si ambos
-  son false entonces devuelve el children sin efectos. */
-  return enableElevation
-    ? elevationComponent
-    : enableHide
-    ? hideComponent
-    : originalComponent;
-}
-
+/** Componente base que implementa el componente AppBar nativo de material-ui.
+ *
+ * @see https://material-ui.com/components/app-bar/
+ *
+ * @param props AppBarBaseProps
+ * @returns JSX.Element
+ */
 export default function AppBarBase(props: AppBarBaseProps) {
   const { classes, styles, title, position, children } = props;
   const [enableElevation] = useState(props.enableElevation);
@@ -102,13 +60,13 @@ AppBarBase.defaultProps = {
 };
 
 AppBarBase.propTypes = {
+  styles: PropTypes.string,
+  classes: PropTypes.object,
+
   enableElevation: PropTypes.bool,
   enableHide: PropTypes.bool,
 
-  /* AppBarBase props */
   title: PropTypes.string,
-  styles: PropTypes.string,
-  classes: PropTypes.object,
   position: PropTypes.oneOf([
     "absolute",
     "fixed",

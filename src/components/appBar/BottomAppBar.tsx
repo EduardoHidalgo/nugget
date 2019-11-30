@@ -5,10 +5,10 @@ import AppBarBase from "./AppBarBase";
 import { IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { BottomAppBarProps } from "../../types/BottomAppBarProps";
-import { DashboardThemeProps } from "src/components/dashboard/DashboardThemeProps";
+import { DashboardTheme } from "src/types/DashboardTheme";
 
-const useStyles = makeStyles<DashboardThemeProps, BottomAppBarProps>(
-  (theme: DashboardThemeProps) => ({
+const useStyles = makeStyles<DashboardTheme, BottomAppBarProps>(
+  (theme: DashboardTheme) => ({
     appBar: {
       top: "auto",
       bottom: 0,
@@ -17,12 +17,21 @@ const useStyles = makeStyles<DashboardThemeProps, BottomAppBarProps>(
   })
 );
 
+/** Variante de AppBar: Posiciona el AppBar en la parte inferior de la vista
+ * con diseño orientado a mobile.
+ *
+ * @see https://material-ui.com/components/app-bar/#bottom-app-bar
+ *
+ * @param props BottomAppBarProps
+ * @returns JSX.Element
+ */
 export default function BottomAppBar(props: BottomAppBarProps) {
+  const { handleOpenDrawer } = props;
   const classes = useStyles(props);
 
   return (
     <AppBarBase classes={classes} styles={classes.appBar} position={"fixed"}>
-      <IconButton edge="start" color="inherit" onClick={props.handleOpenDrawer}>
+      <IconButton edge="start" color="inherit" onClick={handleOpenDrawer}>
         <MenuIcon />
       </IconButton>
     </AppBarBase>
@@ -30,5 +39,7 @@ export default function BottomAppBar(props: BottomAppBarProps) {
 }
 
 BottomAppBar.propTypes = {
+  classes: PropTypes.object,
+
   handleOpenDrawer: PropTypes.func.isRequired
 };

@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBarBase from "./AppBarBase";
 import { PermanentAppBarProps } from "../../types/PermanentAppBarProps";
-import { DashboardThemeProps } from "src/components/dashboard/DashboardThemeProps";
+import { DashboardTheme } from "src/types/DashboardTheme";
 
-const useStyles = makeStyles<DashboardThemeProps, PermanentAppBarProps>(
-  (theme: DashboardThemeProps) => ({
+const useStyles = makeStyles<DashboardTheme, PermanentAppBarProps>(
+  (theme: DashboardTheme) => ({
     appBar: {
       width: props => `calc(100% - ${props.drawerWidth}px)`,
       marginLeft: props => props.drawerWidth,
@@ -18,27 +18,39 @@ const useStyles = makeStyles<DashboardThemeProps, PermanentAppBarProps>(
   })
 );
 
+/** Variante de AppBar: Posiciona el AppBar en la parte inferior de la vista
+ * con diseño orientado a mobile.
+ *
+ * @see https://material-ui.com/components/drawers/#permanent-drawer
+ *
+ * @param props PermanentAppBarProps
+ * @returns JSX.Element
+ */
 export default function PermanentAppBar(props: PermanentAppBarProps) {
+  const { title, enableElevation, enableHide } = props;
   const classes = useStyles(props);
 
   return (
     <AppBarBase
       classes={classes}
       position={"fixed"}
-      title={props.title}
-      enableHide={props.enableHide}
-      enableElevation={props.enableElevation}
+      title={title}
+      enableHide={enableHide}
+      enableElevation={enableElevation}
     />
   );
 }
 
+PermanentAppBar.defaultProps = {
+  title: "PermanentAppBar Title",
+  drawerWidth: 240
+};
+
 PermanentAppBar.propTypes = {
-  /* AppBarBase props */
+  classes: PropTypes.object,
+  drawerWidth: PropTypes.number,
+
   title: PropTypes.string.isRequired,
   enableElevation: PropTypes.bool,
-  enableHide: PropTypes.bool,
-
-  /* Material-UI props */
-  classes: PropTypes.object,
-  drawerWidth: PropTypes.number
+  enableHide: PropTypes.bool
 };
