@@ -1,12 +1,16 @@
 import React from "react";
 import { Paper } from "@material-ui/core";
-import { MaterialBase } from "src/types/MaterialBase";
 import { Children } from "src/types/Children";
 
-interface Props extends MaterialBase {
-  children?: Children;
-}
+interface PaperBaseProps extends Children {}
 
-export default function PaperBase(props: Props) {
-  return <Paper>{props.children}</Paper>;
+/** Componente base que implementa el componente Paper
+ * nativo de material-ui.
+ *
+ * @param props IconButtonBaseProps
+ * @returns JSX.Element
+ */
+export default function PaperBase(props: PaperBaseProps) {
+  const { children } = props;
+  return <Paper>{children}</Paper>;
 }
