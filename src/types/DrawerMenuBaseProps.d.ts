@@ -5,7 +5,7 @@ import { Children } from "src/types/Children";
  * asociadas con el componente DrawerMenu. */
 export interface DrawerMenuBaseProps {
   /** Tipo de Drawer a renderear. */
-  type: "permanent" | "persistent" | "temporary" | "mobile";
+  type?: "permanent" | "persistent" | "temporary" | "mobile";
 
   /** Arreglo de keys de los módulos. */
   keys: Array<string>;

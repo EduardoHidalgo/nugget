@@ -38,6 +38,7 @@ export default function PermanentDashboard(props: Props) {
         icons={props.icons}
         handleModule={props.handleModule}
         handleOpenDrawer={() => {}}
+        handleCloseDrawer={() => {}}
         openDrawer={false}
         drawerWidth={240}
       />

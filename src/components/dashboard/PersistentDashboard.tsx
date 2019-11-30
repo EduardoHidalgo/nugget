@@ -41,6 +41,7 @@ export default function PersistentDashboard(props: Props) {
       <PersistentDrawer
         openDrawer={props.openDrawer}
         handleOpenDrawer={props.handleOpenDrawer}
+        handleCloseDrawer={() => {}}
         drawerWidth={240}
         keys={props.keys}
         titles={props.titles}
