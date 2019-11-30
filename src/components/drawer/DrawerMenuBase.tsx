@@ -8,24 +8,33 @@ import {
   ListItemText,
   Divider
 } from "@material-ui/core";
-import { DrawerType } from "../../types/DrawerType";
+import { DrawerMenuBaseProps } from "../../types/DrawerMenuBaseProps";
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   toolbar: theme.mixins.toolbar
 }));
 
-export default function DrawerMenuBase(props: DrawerType) {
+/** Componente base que implementa el componente DrawerMenu nativo de material-ui.
+ *
+ * @see https://material-ui.com/components/drawers/
+ * @see https://material-ui.com/api/list/
+ * @see https://material-ui.com/api/list-item/
+ *
+ * @param props DrawerMenuBaseProps
+ * @returns JSX.Element
+ */
+export default function DrawerMenuBase(props: DrawerMenuBaseProps) {
   const classes = useStyles();
 
-  const { titles, icons, keys } = props;
+  const { type, titles, icons, keys, handleModule } = props;
 
   /* Manda la variable "key" para indicar que módulo fué seleccionado */
-  const HandleClick = (key?: string) => props.handleModule(key);
+  const HandleClick = (key: string) => handleModule(key);
 
   return (
     <Fragment>
       {/* Añade un toolbar spacing en el caso de que sea tipo "persistent" */}
-      {props.type != "persistent" ? <div className={classes.toolbar} /> : null}
+      {type != "persistent" ? <div className={classes.toolbar} /> : null}
       <Divider />
       <List dense disablePadding>
         {/* Mapea los módulos recibidos en el drawer */}

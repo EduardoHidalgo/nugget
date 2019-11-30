@@ -4,7 +4,7 @@ import { Theme, makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import DrawerBase from "./DrawerBase";
-import { DrawerBaseProps } from "../../types/DrawerBaseProps";
+import { PersistentDrawerProps } from "src/types/PersistentDrawerProps";
 
 const useStyles = makeStyles<Theme, PersistentDrawerProps>((theme: Theme) => ({
   drawer: {
@@ -23,17 +23,20 @@ const useStyles = makeStyles<Theme, PersistentDrawerProps>((theme: Theme) => ({
   }
 }));
 
-interface PersistentDrawerProps extends DrawerBaseProps {
-  drawerWidth: number;
-}
-
+/** Variante de drawer: Permite mostrar o esconder el drawer al mismo nivel que
+ * la vista, empujándola para aparecer el drawer.
+ *
+ * @param props PersistentDrawerProps
+ * @returns JSX.Element
+ */
 export default function PersistentDrawer(props: PersistentDrawerProps) {
+  const { handleOpenDrawer } = props;
   const classes = useStyles(props);
 
   return (
     <DrawerBase classes={classes} type={"persistent"} {...props}>
       <div className={classes.drawerHeader}>
-        <IconButton onClick={props.handleOpenDrawer}>
+        <IconButton onClick={handleOpenDrawer}>
           <ChevronLeftIcon />
         </IconButton>
       </div>

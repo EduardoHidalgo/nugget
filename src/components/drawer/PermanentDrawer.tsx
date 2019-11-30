@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import DrawerBase from "./DrawerBase";
-import { DrawerBaseProps } from "../../types/DrawerBaseProps";
+import { PermanentDrawerProps } from "src/types/PermanentDrawerProps";
 
 const useStyles = makeStyles<Theme, PermanentDrawerProps>(() => ({
   root: {
@@ -17,10 +17,12 @@ const useStyles = makeStyles<Theme, PermanentDrawerProps>(() => ({
   }
 }));
 
-interface PermanentDrawerProps extends DrawerBaseProps {
-  drawerWidth: number;
-}
-
+/** Variante de drawer: Muestra de forma permanente el drawer en la vista
+ * sin permitir esconderlo.
+ *
+ * @param props PermanentDrawerProps
+ * @returns JSX.Element
+ */
 export default function PermanentDrawer(props: PermanentDrawerProps) {
   const classes = useStyles(props);
 

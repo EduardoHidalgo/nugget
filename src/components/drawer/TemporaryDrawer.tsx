@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import DrawerBase from "./DrawerBase";
-import { DrawerBaseProps } from "../../types/DrawerBaseProps";
+import { TemporaryDrawerProps } from "src/types/TemporaryDrawerProps";
 
 const useStyles = makeStyles<Theme, TemporaryDrawerProps>(() => ({
   root: {
@@ -17,18 +17,22 @@ const useStyles = makeStyles<Theme, TemporaryDrawerProps>(() => ({
   }
 }));
 
-interface TemporaryDrawerProps extends DrawerBaseProps {
-  drawerWidth: number;
-  swippeable?: boolean;
-}
-
+/** Variante de drawer: Permite mostrar o esconder el drawer por sobre la vista,
+ * agregando una capa de opacidad.
+ *
+ * @param props TemporaryDrawerProps
+ * @returns JSX.Element
+ */
 export default function TemporaryDrawer(props: TemporaryDrawerProps) {
+  const { swippeable } = props;
   const classes = useStyles(props);
 
   return (
     <DrawerBase
       classes={classes}
-      type={props.swippeable ? "mobile" : "temporary"}
+      /* Si swippleable = true, renderea la versión mobile del drawer
+      (incluye el feature para hacer swipe al menú). */
+      type={swippeable ? "mobile" : "temporary"}
       {...props}
     />
   );

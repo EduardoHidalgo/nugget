@@ -21,7 +21,7 @@ const useStyles = makeStyles<DrawerBaseProps>(() => ({
   }
 }));
 
-/* Estilos para el Drawer en caso de no pasarse ningún estilo. El
+/** Estilos para el Drawer en caso de no pasarse ningún estilo. El
 valor de DrawerWidth es requerido obligatoriamente. */
 const useDefaultStyles = makeStyles<DrawerBaseProps>(() => ({
   drawer: {
@@ -34,6 +34,15 @@ const useDefaultStyles = makeStyles<DrawerBaseProps>(() => ({
   }
 }));
 
+/** Componente base que implementa el componente Drawer nativo de material-ui.
+ * Este componente es el que más props y estados maneja respecto al componente de alto
+ * nivel "dashboard".
+ *
+ * @see https://material-ui.com/components/drawers/
+ *
+ * @param props DrawerBaseProps
+ * @returns JSX.Element
+ */
 export default function DrawerBase(props: DrawerBaseProps) {
   /* En caso de que no se entregue un tipo de drawer, se propone un
   conjunto de estilos default dado la obligatoriedad del drawerWidth. */
@@ -54,6 +63,8 @@ export default function DrawerBase(props: DrawerBaseProps) {
     children
   } = props;
 
+  /* Aquí se renderea el menú del Drawer de manera dinámica y autommática. Toma
+  el arreglo de titles, keys y icons y los mapea dentro del menú. */
   const drawerContent = (
     <Fragment>
       {/* DrawerIntersection */}
@@ -69,6 +80,8 @@ export default function DrawerBase(props: DrawerBaseProps) {
     </Fragment>
   );
 
+  /* Aquí se renderea el drawer nativo de material-ui y recibe todos los props
+  requeridos para su uso. */
   const drawer = (
     <Drawer
       className={classes.drawer}
@@ -96,9 +109,9 @@ export default function DrawerBase(props: DrawerBaseProps) {
       <SwipeableDrawer
         className={classes.drawer}
         SwipeAreaProps={{ className: classes.privateSwippeableArea }}
-        open={openDrawer == undefined ? false : openDrawer}
-        onClose={handleCloseDrawer == undefined ? () => {} : handleCloseDrawer}
-        onOpen={handleOpenDrawer == undefined ? () => {} : handleOpenDrawer}
+        open={openDrawer}
+        onClose={handleCloseDrawer}
+        onOpen={handleOpenDrawer}
         onKeyDown={handleCloseDrawer}
         onClick={handleCloseDrawer}
         ModalProps={{
