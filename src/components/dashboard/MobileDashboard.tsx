@@ -28,6 +28,7 @@ export default function MobileDashboard(props: Props) {
     <div className={classes.root}>
       <BottomAppBar handleOpenDrawer={props.handleOpenDrawer} />
       <TemporaryDrawer
+        type={"mobile"}
         openDrawer={props.openDrawer}
         handleOpenDrawer={props.handleOpenDrawer}
         drawerWidth={240}

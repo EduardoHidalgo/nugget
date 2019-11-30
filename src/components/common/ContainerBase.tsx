@@ -1,23 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Container } from "@material-ui/core";
-import { MaterialBase } from "src/types/MaterialBase";
-import { Children } from "src/types/Children";
+import { ContainerBaseProps } from "src/types/ContainerBaseProps";
 
-interface Props extends MaterialBase {
-  maxWidth?: false | "xs" | "sm" | "md" | "lg" | "xl";
-  fixed?: boolean;
-  children?: Children;
-}
+/** Componente base que implementa el componente Container
+ * nativo de material-ui.
+ *
+ * @see https://material-ui.com/components/container/
+ *
+ * @param props ContainerBaseProps
+ * @returns JSX.Element
+ */
+export default function ContainerBase(props: ContainerBaseProps) {
+  const { maxWidth, fixed, classes, children } = props;
 
-export default function ContainerBase(props: Props) {
   return (
-    <Container
-      maxWidth={props.maxWidth}
-      fixed={props.fixed}
-      classes={props.classes}
-    >
-      {props.children}
+    <Container maxWidth={maxWidth} fixed={fixed} classes={classes}>
+      {children}
     </Container>
   );
 }
@@ -32,6 +31,7 @@ ContainerBase.propTypes = {
   maxWidth: PropTypes.string,
   fixed: PropTypes.bool,
   classes: PropTypes.object,
+
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
