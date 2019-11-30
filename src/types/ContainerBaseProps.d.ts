@@ -6,7 +6,7 @@ import { Children } from "./Children";
  *
  * @see https://material-ui.com/api/container/
  */
-export interface ContainerBaseProps extends MaterialBase {
+export interface ContainerBaseProps extends MaterialBase, Children {
   /** Determina el tamaño máximo del container. El contenedor crece en tamaño
    * junto con la pantalla. Establece "false" para desabilitar el maxWidth.
    */
@@ -14,7 +14,4 @@ export interface ContainerBaseProps extends MaterialBase {
 
   /** Establece el width máximo igual al width mínimo del breakpoint actual. */
   fixed?: boolean;
-
-  /** Componente a renderear dentro del container. */
-  children?: Children;
 }

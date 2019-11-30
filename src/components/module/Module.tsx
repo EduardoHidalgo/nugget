@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import PropTypes from "prop-types";
 import PermanentModule from "./PermanentModule";
 import PersistentModule from "./PersistentModule";
@@ -9,6 +9,8 @@ import { InyectedModuleProps } from "../../types/InyectedModuleProps";
 export default function Module(props: InyectedModuleProps) {
   const { moduleType, drawerWidth, openDrawer, children } = props;
 
+  /* Dependiendo de que tipo de dashboard se haga render, el componente "module"
+  se renderea con estilos especiales para dicho dashboard.  */
   switch (moduleType) {
     case "permanent":
       return <PermanentModule>{children}</PermanentModule>;
@@ -21,9 +23,9 @@ export default function Module(props: InyectedModuleProps) {
     case "temporary":
       return <PermanentModule>{children}</PermanentModule>;
     case "mobile":
-      return <MobileModule>{children as any}</MobileModule>;
+      return <MobileModule>{children}</MobileModule>;
     default:
-      return <ContainerBase>{children as any}</ContainerBase>;
+      return <ContainerBase>{children}</ContainerBase>;
   }
 }
 

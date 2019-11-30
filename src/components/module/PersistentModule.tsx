@@ -2,15 +2,9 @@ import React from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
-import { Children } from "src/types/Children";
+import { PersistentModuleProps } from "src/types/PersistentModuleProps";
 
-interface Props {
-  drawerWidth: number;
-  openDrawer: boolean;
-  children: Children;
-}
-
-const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, PersistentModuleProps>((theme: Theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -36,17 +30,23 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
   }
 }));
 
-export default function PersistentModule(props: Props) {
+/** Variante de Module: añade estilos adicionales para renderear el componente
+ * module dentro de un Persistent Dashboard
+ *
+ * @param props PersistentModuleProps
+ */
+export default function PersistentModule(props: PersistentModuleProps) {
+  const { openDrawer, children } = props;
   const classes = useStyles(props);
 
   return (
     <main
       className={clsx(classes.content, {
-        [classes.contentShift]: props.openDrawer
+        [classes.contentShift]: openDrawer
       })}
     >
       <div className={classes.drawerHeader} />
-      {props.children}
+      {children}
     </main>
   );
 }
@@ -54,6 +54,7 @@ export default function PersistentModule(props: Props) {
 PersistentModule.propTypes = {
   drawerWidth: PropTypes.number.isRequired,
   openDrawer: PropTypes.bool.isRequired,
+
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

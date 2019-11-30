@@ -2,12 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import { Children } from "src/types/Children";
+import { PermanentModuleProps } from "src/types/PermanentModuleProps";
 
-interface Props {
-  children: Children;
-}
-
-const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, PermanentModuleProps>((theme: Theme) => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
@@ -16,13 +13,20 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
   toolbar: theme.mixins.toolbar
 }));
 
-export default function PermanentModule(props: Props) {
+/** Variante de Module: Renderea un módulo con estilos apropiados
+ * para el PermanentDashboard.
+ *
+ * @param props PermanentModuleProps
+ * @returns JSX.Element
+ */
+export default function PermanentModule(props: PermanentModuleProps) {
+  const { children } = props;
   const classes = useStyles(props);
 
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
-      {props.children}
+      {children}
     </main>
   );
 }

@@ -1,13 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
-import { Children } from "src/types/Children";
+import { MobileModuleProps } from "../../types/MobileModule";
 
-interface Props {
-  children: Children;
-}
-
-const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, MobileModuleProps>((theme: Theme) => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
@@ -16,12 +12,20 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
   toolbar: theme.mixins.toolbar
 }));
 
-export default function MobileModule(props: Props) {
+/** Variante de Module: variante especial para MobileDashboard
+ * que incluye un toolbar de espaciado en la parte inferior de
+ * la vista (por el AppBarBottom).
+ *
+ * @param props Children
+ * @returns JSX.Element
+ */
+export default function MobileModule(props: MobileModuleProps) {
+  const { children } = props;
   const classes = useStyles(props);
 
   return (
     <main className={classes.content}>
-      {props.children}
+      {children}
       <div className={classes.toolbar} />
     </main>
   );
