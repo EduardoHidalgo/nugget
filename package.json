@@ -1,6 +1,6 @@
 {
   "name": "nugget-ui",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "Librería de componentes React basados en Material-UI, enfocado en la fácil implementación y maquetación de layouts complejos.",
   "license": "MIT License",
   "contributors": [
