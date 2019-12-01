@@ -17,6 +17,7 @@ export interface DrawerBaseProps
   /** Función que ejecuta el cierre del Drawer. */
   handleCloseDrawer: () => void;
 
-  /** Función que ejecuta la apertura del Drawer. */
+  /** Función que comunica el dashboard con el componente. Hace trigger del
+  estado "openDrawer" del drawer. */
   handleOpenDrawer: () => void;
 }
