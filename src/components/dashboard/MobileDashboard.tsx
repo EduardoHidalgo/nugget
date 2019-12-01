@@ -3,8 +3,7 @@ import PropTypes, { string } from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import BottomAppBar from "../appBar/BottomAppBar";
 import TemporaryDrawer from "../drawer/TemporaryDrawer";
-import { Children } from "src/types/Children";
-import { BottomAppBarProps } from "src/types/BottomAppBarProps";
+import { MobileDashboardProps } from "src/types/MobileDashboardProps";
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -12,48 +11,59 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   }
 }));
 
-interface Props extends Children, BottomAppBarProps {
-  keys: Array<string>;
-  titles: Array<string>;
-  icons: Array<React.ReactElement>;
-  handleModule: (key?: string) => void;
-  openDrawer: boolean;
-  handleCloseDrawer: () => void;
-}
-
-export default function MobileDashboard(props: Props) {
+/** Variante de Dashboard: Renderea un dashboard adaptado para dispositivos
+ * mobile, con un appbar en la parte inferior de la ventana y un Drawer temporal
+ * swippeable.
+ *
+ * @param props MobileDashboardProps
+ * @returns JSX.Element
+ */
+export default function MobileDashboard(props: MobileDashboardProps) {
+  const {
+    keys,
+    titles,
+    icons,
+    openDrawer,
+    handleOpenDrawer,
+    handleCloseDrawer,
+    handleModule,
+    children
+  } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <BottomAppBar handleOpenDrawer={props.handleOpenDrawer} />
+      <BottomAppBar handleOpenDrawer={handleOpenDrawer} />
       <TemporaryDrawer
         type={"mobile"}
-        openDrawer={props.openDrawer}
-        handleOpenDrawer={props.handleOpenDrawer}
         drawerWidth={240}
-        keys={props.keys}
-        titles={props.titles}
-        icons={props.icons}
-        handleModule={props.handleModule}
-        handleCloseDrawer={props.handleCloseDrawer}
+        keys={keys}
+        titles={titles}
+        icons={icons}
+        openDrawer={openDrawer}
+        handleOpenDrawer={handleOpenDrawer}
+        handleCloseDrawer={handleCloseDrawer}
+        handleModule={handleModule}
         swippeable
       />
-      {props.children}
+      {children}
     </div>
   );
 }
 
 MobileDashboard.propTypes = {
-  handleModule: PropTypes.func.isRequired,
-  openDrawer: PropTypes.bool.isRequired,
-  handleOpenDrawer: PropTypes.func.isRequired,
   keys: PropTypes.arrayOf(string).isRequired,
   titles: PropTypes.arrayOf(string).isRequired,
   icons: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired,
+
+  openDrawer: PropTypes.bool.isRequired,
+  handleModule: PropTypes.func.isRequired,
+  handleOpenDrawer: PropTypes.func.isRequired,
+  handleCloseDrawer: PropTypes.func.isRequired,
+
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

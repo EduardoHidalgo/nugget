@@ -13,31 +13,39 @@ import MobileDashboard from "./MobileDashboard";
 import { Hidden } from "@material-ui/core";
 import { ModuleProps } from "../../types/ModuleProps";
 import { InyectedModuleProps } from "../../types/InyectedModuleProps";
+import { DashboardBaseProps } from "src/types/DashboardBaseProps";
 
-interface Props {
-  theme: object;
-  type?: "permanent" | "persistent" | "temporary" | "mobile";
-  title: string;
-  enableHide: boolean;
-  enableElevation: boolean;
-  children: React.ReactElement<ModuleProps>[];
-}
+/** Componente base que renderea un dashboard a partir de sub-componentes
+ * como Drawer, AppBar y Module.
+ *
+ * @param props DashboardBaseProps
+ * @returns JSX.Element
+ */
+export default function DashboardBase(props: DashboardBaseProps) {
+  const { title, enableElevation, enableHide, children } = props;
 
-export default function DashboardBase(props: Props) {
   /* Provee la capa de estilos en caso que se pasen via props */
   let theme;
   if (props.theme) theme = createMuiTheme(props.theme);
   else theme = useTheme();
 
+  /* Aquí se establece de manera estática (de momento) el punto
+  de breakpoint para hacer switch entre el diseño mobile y desktop en
+  tiempo real al redimensionar la ventana. */
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  /* Aquí se mantiene en estados el tipo del dashboard y el estado
+  del drawer, los cuales se propagan al resto de componentes hacia abajo. */
   const [type, setType] = useState(isMobile ? "mobile" : props.type);
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  /* Arreglo de valores que requiere el DrawerMenu */
   let keys: Array<string> = [];
   let titles: Array<string> = [];
   let icons: Array<React.ReactElement> = [];
 
+  /* Cambia en tiempo real el tipo de componente en caso que
+  la ventana sufra un cambio en el tamaño. */
   useEffect(() => {
     if (isMobile) setType("mobile");
     else setType(props.type);
@@ -58,6 +66,10 @@ export default function DashboardBase(props: Props) {
   const HandleModule = (key?: string) => {
     let index: number = 0;
 
+    /* Obtiene el valor "key" de cada módulo y compara cual
+    es igual al módulo que recibió un click. Esto devuelve el index
+    de la opción en el menú y establece el módulo que tenga el mismo
+    index. */
     (modules: React.ReactElement<InyectedModuleProps>[]) =>
       React.Children.map(modules, (m, i) => {
         if (m.props.key == key) {
@@ -67,10 +79,14 @@ export default function DashboardBase(props: Props) {
         }
       });
 
+    /* Si el módulo no es rendereado por algún motivo, arroja un error
+      en consola. */
     if (index == null)
       console.error("moduleIndex was null and module was not found.");
   };
 
+  /* Obtiene todos los valores key, title y props dentro de cada module que
+  se entregó via props.children. */
   function ExtractModulesProps(children: React.ReactElement<ModuleProps>[]) {
     children.forEach(m => {
       keys.push(m.props.key as string);
@@ -115,13 +131,13 @@ export default function DashboardBase(props: Props) {
 
   const permanentDashboard = (
     <PermanentDashboard
-      title={props.title}
+      title={title}
       keys={keys}
       titles={titles}
       icons={icons}
       handleModule={HandleModule}
-      enableHide={props.enableHide}
-      enableElevation={props.enableElevation}
+      enableHide={enableHide}
+      enableElevation={enableElevation}
     >
       {modules != null
         ? (modules: React.ReactElement<InyectedModuleProps>[]) => {
@@ -133,15 +149,15 @@ export default function DashboardBase(props: Props) {
 
   const persistentDashboard = (
     <PersistentDashboard
-      title={props.title}
+      title={title}
       openDrawer={openDrawer}
       handleOpenDrawer={HandleOpenDrawer}
       keys={keys}
       titles={titles}
       icons={icons}
       handleModule={HandleModule}
-      enableHide={props.enableHide}
-      enableElevation={props.enableElevation}
+      enableHide={enableHide}
+      enableElevation={enableElevation}
     >
       {modules != null
         ? (modules: React.ReactElement<InyectedModuleProps>[]) => {
@@ -153,7 +169,7 @@ export default function DashboardBase(props: Props) {
 
   const temporaryDashboard = (
     <TemporaryDashboard
-      title={props.title}
+      title={title}
       openDrawer={openDrawer}
       handleOpenDrawer={HandleOpenDrawer}
       handleCloseDrawer={HandleCloseDrawer}
@@ -161,8 +177,8 @@ export default function DashboardBase(props: Props) {
       titles={titles}
       icons={icons}
       handleModule={HandleModule}
-      enableHide={props.enableHide}
-      enableElevation={props.enableElevation}
+      enableHide={enableHide}
+      enableElevation={enableElevation}
     >
       {modules != null
         ? (modules: React.ReactElement<InyectedModuleProps>[]) => {

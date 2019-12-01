@@ -3,7 +3,7 @@ import PropTypes, { string } from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import PermanentAppBar from "../appBar/PermanentAppBar";
 import PermanentDrawer from "../drawer/PermanentDrawer";
-import { Children } from "src/types/Children";
+import { PermanentDashboardProps } from "src/types/PermanentDashboardProps";
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -11,38 +11,44 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   }
 }));
 
-interface Props extends Children {
-  title: string;
-  enableHide: boolean;
-  enableElevation: boolean;
-  keys: Array<string>;
-  titles: Array<string>;
-  icons: Array<React.ReactElement>;
-  handleModule: (key?: string) => void;
-}
-
-export default function PermanentDashboard(props: Props) {
+/** Variante de Dashboard: Este dashboard incluye el PermanentDrawer y
+ * el PermanentAppBar.
+ *
+ * @param props PermanentDashboardProps
+ * @returns JSX.Element
+ */
+export default function PermanentDashboard(props: PermanentDashboardProps) {
+  const {
+    title,
+    keys,
+    titles,
+    icons,
+    handleModule,
+    enableElevation,
+    enableHide,
+    children
+  } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <PermanentAppBar
-        title={props.title}
+        title={title}
         drawerWidth={240}
-        enableHide={props.enableHide}
-        enableElevation={props.enableElevation}
+        enableHide={enableHide}
+        enableElevation={enableElevation}
       />
       <PermanentDrawer
-        keys={props.keys}
-        titles={props.titles}
-        icons={props.icons}
-        handleModule={props.handleModule}
+        drawerWidth={240}
+        keys={keys}
+        titles={titles}
+        icons={icons}
+        openDrawer={false}
         handleOpenDrawer={() => {}}
         handleCloseDrawer={() => {}}
-        openDrawer={false}
-        drawerWidth={240}
+        handleModule={handleModule}
       />
-      {props.children}
+      {children}
     </div>
   );
 }
@@ -53,15 +59,18 @@ PermanentDashboard.defaultProps = {
 
 PermanentDashboard.propTypes = {
   title: PropTypes.string,
+
   handleModule: PropTypes.func.isRequired,
   enableElevation: PropTypes.bool,
   enableHide: PropTypes.bool,
+
   keys: PropTypes.arrayOf(string).isRequired,
   titles: PropTypes.arrayOf(string).isRequired,
   icons: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired,
+
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
