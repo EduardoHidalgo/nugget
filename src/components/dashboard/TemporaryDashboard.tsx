@@ -3,7 +3,7 @@ import PropTypes, { string } from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import TemporaryAppBar from "../appBar/TemporaryAppBar";
 import TemporaryDrawer from "../drawer/TemporaryDrawer";
-import { TemporaryDashboardProps } from "src/types/TemporaryDashboardProps";
+import { TemporaryDashboardProps } from "../../types/TemporaryDashboardProps";
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 export default function TemporaryDashboard(props: TemporaryDashboardProps) {
   const {
     title,
-    keys,
+    indexes,
     titles,
     icons,
     enableElevation,
@@ -31,7 +31,7 @@ export default function TemporaryDashboard(props: TemporaryDashboardProps) {
     handleModule,
     children
   } = props;
-  const classes = useStyles();
+  const classes = useStyles(props);
 
   return (
     <div className={classes.root}>
@@ -44,7 +44,7 @@ export default function TemporaryDashboard(props: TemporaryDashboardProps) {
       />
       <TemporaryDrawer
         drawerWidth={240}
-        keys={keys}
+        indexes={indexes}
         titles={titles}
         icons={icons}
         openDrawer={openDrawer}
@@ -67,7 +67,7 @@ TemporaryDashboard.propTypes = {
   enableElevation: PropTypes.bool,
   enableHide: PropTypes.bool,
 
-  keys: PropTypes.arrayOf(string).isRequired,
+  indexes: PropTypes.arrayOf(string).isRequired,
   titles: PropTypes.arrayOf(string).isRequired,
   icons: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

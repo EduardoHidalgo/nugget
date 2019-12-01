@@ -5,7 +5,7 @@ import AppBarBase from "./AppBarBase";
 import { IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { BottomAppBarProps } from "../../types/BottomAppBarProps";
-import { DashboardTheme } from "src/types/DashboardTheme";
+import { DashboardTheme } from "../../types/DashboardTheme";
 
 const useStyles = makeStyles<DashboardTheme, BottomAppBarProps>(
   (theme: DashboardTheme) => ({

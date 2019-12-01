@@ -4,7 +4,7 @@ import { Theme, makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import DrawerBase from "./DrawerBase";
-import { PersistentDrawerProps } from "src/types/PersistentDrawerProps";
+import { PersistentDrawerProps } from "../../types/PersistentDrawerProps";
 
 const useStyles = makeStyles<Theme, PersistentDrawerProps>((theme: Theme) => ({
   drawer: {
@@ -62,7 +62,7 @@ PersistentDrawer.propTypes = {
   handleCloseDrawer: PropTypes.func,
   handleModule: PropTypes.func.isRequired,
 
-  keys: PropTypes.array.isRequired,
+  indexes: PropTypes.array.isRequired,
   titles: PropTypes.array.isRequired,
   icons: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

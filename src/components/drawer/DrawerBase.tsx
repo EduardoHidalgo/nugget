@@ -53,7 +53,7 @@ export default function DrawerBase(props: DrawerBaseProps) {
   const [anchor, setAnchor] = useState(props.anchor);
 
   const {
-    keys,
+    indexes,
     titles,
     icons,
     handleModule,
@@ -64,7 +64,7 @@ export default function DrawerBase(props: DrawerBaseProps) {
   } = props;
 
   /* Aquí se renderea el menú del Drawer de manera dinámica y autommática. Toma
-  el arreglo de titles, keys y icons y los mapea dentro del menú. */
+  el arreglo de titles, indexes y icons y los mapea dentro del menú. */
   const drawerContent = (
     <Fragment>
       {/* DrawerIntersection */}
@@ -72,7 +72,7 @@ export default function DrawerBase(props: DrawerBaseProps) {
       {/* DrawerMenu */}
       <DrawerMenuBase
         type={type}
-        keys={keys}
+        indexes={indexes}
         titles={titles}
         icons={icons}
         handleModule={handleModule}
@@ -146,7 +146,7 @@ DrawerBase.propTypes = {
   handleCloseDrawer: PropTypes.func,
   handleModule: PropTypes.func.isRequired,
 
-  keys: PropTypes.array.isRequired,
+  indexes: PropTypes.array.isRequired,
   titles: PropTypes.array.isRequired,
   icons: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

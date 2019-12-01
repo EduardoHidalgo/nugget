@@ -3,7 +3,7 @@ import PropTypes, { string } from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import BottomAppBar from "../appBar/BottomAppBar";
 import TemporaryDrawer from "../drawer/TemporaryDrawer";
-import { MobileDashboardProps } from "src/types/MobileDashboardProps";
+import { MobileDashboardProps } from "../../types/MobileDashboardProps";
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
  */
 export default function MobileDashboard(props: MobileDashboardProps) {
   const {
-    keys,
+    indexes,
     titles,
     icons,
     openDrawer,
@@ -29,7 +29,7 @@ export default function MobileDashboard(props: MobileDashboardProps) {
     handleModule,
     children
   } = props;
-  const classes = useStyles();
+  const classes = useStyles(props);
 
   return (
     <div className={classes.root}>
@@ -37,7 +37,7 @@ export default function MobileDashboard(props: MobileDashboardProps) {
       <TemporaryDrawer
         type={"mobile"}
         drawerWidth={240}
-        keys={keys}
+        indexes={indexes}
         titles={titles}
         icons={icons}
         openDrawer={openDrawer}
@@ -52,7 +52,7 @@ export default function MobileDashboard(props: MobileDashboardProps) {
 }
 
 MobileDashboard.propTypes = {
-  keys: PropTypes.arrayOf(string).isRequired,
+  indexes: PropTypes.arrayOf(string).isRequired,
   titles: PropTypes.arrayOf(string).isRequired,
   icons: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

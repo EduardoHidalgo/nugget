@@ -1,5 +1,5 @@
-import { Children } from "src/types/Children";
 import { ModuleProps } from "./ModuleProps";
+import { Children } from "./Children";
 
 /** Esta interfaz define las propiedades que debe recibir
  * el componente "Module" después de recibir la inyección de
@@ -12,8 +12,8 @@ export interface InyectedModuleProps extends ModuleProps, Children {
   moduleType?: "permanent" | "persistent" | "temporary" | "mobile";
 
   /** Number que define el ancho del drawer. */
-  drawerWidth: number;
+  drawerWidth?: number;
 
   /** State que establece si el Drawer se encuentra abierto o cerrado. */
-  openDrawer: boolean;
+  openDrawer?: boolean;
 }

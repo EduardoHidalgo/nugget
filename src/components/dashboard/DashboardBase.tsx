@@ -13,7 +13,7 @@ import MobileDashboard from "./MobileDashboard";
 import { Hidden } from "@material-ui/core";
 import { ModuleProps } from "../../types/ModuleProps";
 import { InyectedModuleProps } from "../../types/InyectedModuleProps";
-import { DashboardBaseProps } from "src/types/DashboardBaseProps";
+import { DashboardBaseProps } from "../../types/DashboardBaseProps";
 
 /** Componente base que renderea un dashboard a partir de sub-componentes
  * como Drawer, AppBar y Module.
@@ -22,7 +22,7 @@ import { DashboardBaseProps } from "src/types/DashboardBaseProps";
  * @returns JSX.Element
  */
 export default function DashboardBase(props: DashboardBaseProps) {
-  const { title, enableElevation, enableHide, children } = props;
+  const { title, enableElevation, enableHide } = props;
 
   /* Provee la capa de estilos en caso que se pasen via props */
   let theme;
@@ -40,7 +40,7 @@ export default function DashboardBase(props: DashboardBaseProps) {
   const [openDrawer, setOpenDrawer] = useState(false);
 
   /* Arreglo de valores que requiere el DrawerMenu */
-  let keys: Array<string> = [];
+  let indexes: Array<string> = [];
   let titles: Array<string> = [];
   let icons: Array<React.ReactElement> = [];
 
@@ -61,35 +61,34 @@ export default function DashboardBase(props: DashboardBaseProps) {
   /* Cierra directamente el Drawer */
   const HandleCloseDrawer = () => setOpenDrawer(false);
 
-  /* Obtiene la key del módulo cuando sufre click dentro del drawer
-  y renderea el módulo correcto a partir de esa key. */
-  const HandleModule = (key?: string) => {
-    let index: number = 0;
+  /* Obtiene el index del módulo cuando sufre click dentro del drawer
+  y renderea el módulo correcto a partir de ese index. */
+  const HandleModule = (index: string) => {
+    let k: number = 0;
 
-    /* Obtiene el valor "key" de cada módulo y compara cual
+    /* Obtiene el valor "index" de cada módulo y compara cual
     es igual al módulo que recibió un click. Esto devuelve el index
     de la opción en el menú y establece el módulo que tenga el mismo
     index. */
-    (modules: React.ReactElement<InyectedModuleProps>[]) =>
-      React.Children.map(modules, (m, i) => {
-        if (m.props.key == key) {
-          index = i;
+    React.Children.map(modules, (m, i) => {
+      if (m.props.index == index) {
+        k = i;
 
-          if (index != null) setModuleIndex(index);
-        }
-      });
+        if (index != null) setModuleIndex(k);
+      }
+    });
 
     /* Si el módulo no es rendereado por algún motivo, arroja un error
       en consola. */
-    if (index == null)
+    if (k == null)
       console.error("moduleIndex was null and module was not found.");
   };
 
-  /* Obtiene todos los valores key, title y props dentro de cada module que
+  /* Obtiene todos los valores index, title y props dentro de cada module que
   se entregó via props.children. */
   function ExtractModulesProps(children: React.ReactElement<ModuleProps>[]) {
     children.forEach(m => {
-      keys.push(m.props.key as string);
+      indexes.push(m.props.index as string);
       titles.push(m.props.title as string);
       icons.push(m.props.icon as React.ReactElement);
     });
@@ -98,52 +97,52 @@ export default function DashboardBase(props: DashboardBaseProps) {
   /* Mapea cada módulo del dashboard y le inyecta props específicos
   según el tipo de dashboard rendereado */
   function InyectModules() {
-    return (children: Array<React.ReactElement<ModuleProps>>) =>
-      React.Children.map(children, m => {
-        switch (type) {
-          case "permanent":
-            return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
-              moduleType: "permanent"
-            });
-          case "persistent":
-            return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
-              moduleType: "persistent",
-              openDrawer: openDrawer,
-              drawerWidth: 240
-            });
-          case "temporary":
-            return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
-              moduleType: "temporary",
-              openDrawer: openDrawer,
-              drawerWidth: 240
-            });
-          case "mobile":
-            return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
-              moduleType: "mobile"
-            });
-          default:
-            return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
-              moduleType: "permanent"
-            });
-        }
-      });
+    return React.Children.map(props.children, m => {
+      switch (type) {
+        case "permanent":
+          return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
+            moduleType: "permanent"
+          });
+        case "persistent":
+          return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
+            moduleType: "persistent",
+            openDrawer: openDrawer,
+            drawerWidth: 240
+          });
+        case "temporary":
+          return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
+            moduleType: "temporary",
+            openDrawer: openDrawer,
+            drawerWidth: 240
+          });
+        case "mobile":
+          return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
+            moduleType: "mobile"
+          });
+        default:
+          return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
+            moduleType: "permanent"
+          });
+      }
+    });
   }
 
   const permanentDashboard = (
     <PermanentDashboard
       title={title}
-      keys={keys}
+      indexes={indexes}
       titles={titles}
       icons={icons}
       handleModule={HandleModule}
       enableHide={enableHide}
       enableElevation={enableElevation}
     >
-      {modules != null
+      {/* {modules != null
         ? (modules: React.ReactElement<InyectedModuleProps>[]) => {
             modules[moduleIndex];
           }
-        : null}
+        : null} */}
+      {modules[moduleIndex]}
     </PermanentDashboard>
   );
 
@@ -152,18 +151,14 @@ export default function DashboardBase(props: DashboardBaseProps) {
       title={title}
       openDrawer={openDrawer}
       handleOpenDrawer={HandleOpenDrawer}
-      keys={keys}
+      indexes={indexes}
       titles={titles}
       icons={icons}
       handleModule={HandleModule}
       enableHide={enableHide}
       enableElevation={enableElevation}
     >
-      {modules != null
-        ? (modules: React.ReactElement<InyectedModuleProps>[]) => {
-            modules[moduleIndex];
-          }
-        : null}
+      {modules[moduleIndex]}
     </PersistentDashboard>
   );
 
@@ -173,18 +168,14 @@ export default function DashboardBase(props: DashboardBaseProps) {
       openDrawer={openDrawer}
       handleOpenDrawer={HandleOpenDrawer}
       handleCloseDrawer={HandleCloseDrawer}
-      keys={keys}
+      indexes={indexes}
       titles={titles}
       icons={icons}
       handleModule={HandleModule}
       enableHide={enableHide}
       enableElevation={enableElevation}
     >
-      {modules != null
-        ? (modules: React.ReactElement<InyectedModuleProps>[]) => {
-            modules[moduleIndex];
-          }
-        : null}
+      {modules[moduleIndex]}
     </TemporaryDashboard>
   );
 
@@ -193,16 +184,12 @@ export default function DashboardBase(props: DashboardBaseProps) {
       openDrawer={openDrawer}
       handleOpenDrawer={HandleOpenDrawer}
       handleCloseDrawer={HandleCloseDrawer}
-      keys={keys}
+      indexes={indexes}
       titles={titles}
       icons={icons}
       handleModule={HandleModule}
     >
-      {modules != null
-        ? (modules: React.ReactElement<InyectedModuleProps>[]) => {
-            modules[moduleIndex];
-          }
-        : null}
+      {modules[moduleIndex]}
     </MobileDashboard>
   );
 

@@ -15,7 +15,7 @@ import { AppBarBaseProps } from "../../types/AppBarBaseProps";
  * @returns JSX.Element
  */
 export default function AppBarBase(props: AppBarBaseProps) {
-  const { classes, styles, title, position, children } = props;
+  const { classes, title, position, styles, children } = props;
   const [enableElevation] = useState(props.enableElevation);
   const [enableHide, setEnableHide] = useState(props.enableHide);
 
@@ -42,9 +42,7 @@ export default function AppBarBase(props: AppBarBaseProps) {
           <Toolbar>
             {children}
             {title ? (
-              <AppBarTitle styles={classes.appBarTitle}>
-                {props.title}
-              </AppBarTitle>
+              <AppBarTitle styles={classes.appBarTitle}>{title}</AppBarTitle>
             ) : null}
           </Toolbar>
         </AppBar>

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Typography } from "@material-ui/core";
-import { TextBaseProps } from "src/types/TextBaseProps";
+import { TextBaseProps } from "../../types/TextBaseProps";
 
 /** TextBase. It serve as base of all texts. Provide and expose the Material-UI
  * Typography component to build Low components derivated from.

@@ -5,8 +5,8 @@ import { Children } from "./Children";
  * tener el componente "MobileDashboard".
  */
 export interface MobileDashboardProps extends Children, BottomAppBarProps {
-  /** Arreglo de keys de los módulos. */
-  keys: Array<string>;
+  /** Arreglo de indexes de los módulos. */
+  indexes: Array<string>;
 
   /** Arreglo de textos a mostrar de los módulos. */
   titles: Array<string>;
@@ -17,9 +17,9 @@ export interface MobileDashboardProps extends Children, BottomAppBarProps {
   /** State que establece si el Drawer se encuentra abierto o cerrado. */
   openDrawer: boolean;
 
-  /** Función que devuelve la key del módulo clickeado
+  /** Función que devuelve el index del módulo clickeado
    * en el DrawerMenu. */
-  handleModule: (key: string) => void;
+  handleModule: (index: string) => void;
 
   /** Función que ejecuta el cierre del Drawer. */
   handleCloseDrawer: () => void;

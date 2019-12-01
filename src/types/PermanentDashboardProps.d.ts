@@ -8,8 +8,8 @@ export interface PermanentDashboardProps extends Children {
   /** String que recibe el título a mostrar en el AppBar */
   title?: string;
 
-  /** Arreglo de keys de los módulos. */
-  keys: Array<string>;
+  /** Arreglo de indexes de los módulos. */
+  indexes: Array<string>;
 
   /** Arreglo de textos a mostrar de los módulos. */
   titles: Array<string>;
@@ -23,7 +23,7 @@ export interface PermanentDashboardProps extends Children {
   /** Boolean que indica si la animación de elevación en AppBar está activa. */
   enableElevation: boolean;
 
-  /** Función que devuelve la key del módulo clickeado
+  /** Función que devuelve el index del módulo clickeado
    * en el DrawerMenu. */
-  handleModule: (key: string) => void;
+  handleModule: (index: string) => void;
 }

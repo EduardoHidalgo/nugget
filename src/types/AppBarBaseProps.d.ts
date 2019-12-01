@@ -1,6 +1,6 @@
-import { MaterialBase } from "src/types/MaterialBase";
-import { Children } from "src/types/Children";
 import { HideOnScrollProps } from "./HideOnScrollProps";
+import { MaterialBase } from "./MaterialBase";
+import { Children } from "./Children";
 
 /** Interfaz que define las propiedades que debe
  * tener el componente "AppBarBase".

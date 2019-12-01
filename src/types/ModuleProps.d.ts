@@ -5,5 +5,5 @@
 export interface ModuleProps {
   title: string;
   icon: React.ReactElement;
-  key: string;
+  index: string;
 }

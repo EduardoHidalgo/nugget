@@ -2,7 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
-import { PersistentModuleProps } from "src/types/PersistentModuleProps";
+import { PersistentModuleProps } from "../../types/PersistentModuleProps";
 
 const useStyles = makeStyles<Theme, PersistentModuleProps>((theme: Theme) => ({
   content: {

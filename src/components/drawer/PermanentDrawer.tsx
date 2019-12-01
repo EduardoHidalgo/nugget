@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import DrawerBase from "./DrawerBase";
-import { PermanentDrawerProps } from "src/types/PermanentDrawerProps";
+import { PermanentDrawerProps } from "../../types/PermanentDrawerProps";
 
 const useStyles = makeStyles<Theme, PermanentDrawerProps>(() => ({
   root: {
@@ -47,7 +47,7 @@ PermanentDrawer.propTypes = {
   handleCloseDrawer: PropTypes.func,
   handleModule: PropTypes.func.isRequired,
 
-  keys: PropTypes.array.isRequired,
+  indexes: PropTypes.array.isRequired,
   titles: PropTypes.array.isRequired,
   icons: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

@@ -5,8 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import AppBarBase from "./AppBarBase";
-import { DashboardTheme } from "src/types/DashboardTheme";
 import { ToogleAppBarProps } from "../../types/ToogleAppBarProps";
+import { DashboardTheme } from "../../types/DashboardTheme";
 
 const useStyles = makeStyles<DashboardTheme, ToogleAppBarProps>(
   (theme: DashboardTheme) => ({

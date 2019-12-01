@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Container } from "@material-ui/core";
-import { ContainerBaseProps } from "src/types/ContainerBaseProps";
+import { ContainerBaseProps } from "../../types/ContainerBaseProps";
 
 /** Componente base que implementa el componente Container
  * nativo de material-ui.

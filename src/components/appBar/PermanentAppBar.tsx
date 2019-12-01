@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBarBase from "./AppBarBase";
 import { PermanentAppBarProps } from "../../types/PermanentAppBarProps";
-import { DashboardTheme } from "src/types/DashboardTheme";
+import { DashboardTheme } from "../../types/DashboardTheme";
 
 const useStyles = makeStyles<DashboardTheme, PermanentAppBarProps>(
   (theme: DashboardTheme) => ({

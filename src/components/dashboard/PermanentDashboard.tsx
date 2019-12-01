@@ -3,7 +3,7 @@ import PropTypes, { string } from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import PermanentAppBar from "../appBar/PermanentAppBar";
 import PermanentDrawer from "../drawer/PermanentDrawer";
-import { PermanentDashboardProps } from "src/types/PermanentDashboardProps";
+import { PermanentDashboardProps } from "../../types/PermanentDashboardProps";
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 export default function PermanentDashboard(props: PermanentDashboardProps) {
   const {
     title,
-    keys,
+    indexes,
     titles,
     icons,
     handleModule,
@@ -28,7 +28,7 @@ export default function PermanentDashboard(props: PermanentDashboardProps) {
     enableHide,
     children
   } = props;
-  const classes = useStyles();
+  const classes = useStyles(props);
 
   return (
     <div className={classes.root}>
@@ -40,7 +40,7 @@ export default function PermanentDashboard(props: PermanentDashboardProps) {
       />
       <PermanentDrawer
         drawerWidth={240}
-        keys={keys}
+        indexes={indexes}
         titles={titles}
         icons={icons}
         openDrawer={false}
@@ -64,7 +64,7 @@ PermanentDashboard.propTypes = {
   enableElevation: PropTypes.bool,
   enableHide: PropTypes.bool,
 
-  keys: PropTypes.arrayOf(string).isRequired,
+  indexes: PropTypes.arrayOf(string).isRequired,
   titles: PropTypes.arrayOf(string).isRequired,
   icons: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

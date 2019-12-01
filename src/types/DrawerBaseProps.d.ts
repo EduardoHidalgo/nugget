@@ -1,6 +1,6 @@
-import { MaterialBase } from "src/types/MaterialBase";
-import { Children } from "src/types/Children";
 import { DrawerMenuBaseProps } from "./DrawerMenuBaseProps";
+import { MaterialBase } from "./MaterialBase";
+import { Children } from "./Children";
 
 /** Esta interfaz define las propiedades que debe recibir
  * el componente "DrawerBase". */

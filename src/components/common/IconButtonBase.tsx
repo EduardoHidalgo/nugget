@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { Theme, IconButton } from "@material-ui/core";
-import { IconButtonBaseProps } from "src/types/IconButtonBaseProps";
+import { IconButtonBaseProps } from "../../types/IconButtonBaseProps";
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   iconButton: {
@@ -27,7 +27,7 @@ export default function IconButtonBase(props: IconButtonBaseProps) {
     children
   } = props;
 
-  const classes = useStyles();
+  const classes = useStyles(props);
 
   return (
     <IconButton

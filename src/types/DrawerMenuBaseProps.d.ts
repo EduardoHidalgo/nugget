@@ -1,14 +1,11 @@
-import { MaterialBase } from "src/types/MaterialBase";
-import { Children } from "src/types/Children";
-
 /** Esta interfaz define las propiedades básicas
  * asociadas con el componente DrawerMenu. */
 export interface DrawerMenuBaseProps {
   /** Tipo de Drawer a renderear. */
   type?: "permanent" | "persistent" | "temporary" | "mobile";
 
-  /** Arreglo de keys de los módulos. */
-  keys: Array<string>;
+  /** Arreglo de indexes de los módulos. */
+  indexes: Array<string>;
 
   /** Arreglo de textos a mostrar de los módulos. */
   titles: Array<string>;
@@ -16,7 +13,7 @@ export interface DrawerMenuBaseProps {
   /** Arreglo de los íconos a mostrar de los módulos. */
   icons: Array<React.ReactElement>;
 
-  /** Función que devuelve la key del módulo clickeado
+  /** Función que devuelve el index del módulo clickeado
    * en el DrawerMenu. */
-  handleModule: (key: string) => void;
+  handleModule: (index: string) => void;
 }

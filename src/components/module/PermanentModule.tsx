@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
-import { Children } from "src/types/Children";
-import { PermanentModuleProps } from "src/types/PermanentModuleProps";
+import { PermanentModuleProps } from "../../types/PermanentModuleProps";
 
 const useStyles = makeStyles<Theme, PermanentModuleProps>((theme: Theme) => ({
   content: {

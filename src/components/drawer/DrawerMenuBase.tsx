@@ -24,12 +24,12 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
  * @returns JSX.Element
  */
 export default function DrawerMenuBase(props: DrawerMenuBaseProps) {
-  const classes = useStyles();
+  const classes = useStyles(props);
 
-  const { type, titles, icons, keys, handleModule } = props;
+  const { type, titles, icons, indexes, handleModule } = props;
 
-  /* Manda la variable "key" para indicar que módulo fué seleccionado */
-  const HandleClick = (key: string) => handleModule(key);
+  /* Manda la variable "index" para indicar que módulo fué seleccionado */
+  const HandleClick = (index: string) => handleModule(index);
 
   return (
     <Fragment>
@@ -41,8 +41,8 @@ export default function DrawerMenuBase(props: DrawerMenuBaseProps) {
         {titles.map((title: string, index: number) => (
           <ListItem
             button
-            key={keys[index]}
-            onClick={() => HandleClick(keys[index])}
+            key={indexes[index]}
+            onClick={() => HandleClick(indexes[index])}
           >
             <ListItemIcon>{icons[index]}</ListItemIcon>
             <ListItemText disableTypography>{title}</ListItemText>
@@ -55,7 +55,7 @@ export default function DrawerMenuBase(props: DrawerMenuBaseProps) {
 
 DrawerMenuBase.propTypes = {
   type: PropTypes.string.isRequired,
-  keys: PropTypes.array.isRequired,
+  indexes: PropTypes.array.isRequired,
   titles: PropTypes.array.isRequired,
   icons: PropTypes.arrayOf(PropTypes.element).isRequired,
   handleModule: PropTypes.func.isRequired

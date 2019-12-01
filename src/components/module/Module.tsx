@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import PermanentModule from "./PermanentModule";
 import PersistentModule from "./PersistentModule";
@@ -36,6 +36,6 @@ Module.propTypes = {
     "temporary",
     "mobile"
   ]),
-  drawerWidth: PropTypes.number.isRequired,
-  openDrawer: PropTypes.bool.isRequired
+  drawerWidth: PropTypes.number,
+  openDrawer: PropTypes.bool
 };

@@ -3,7 +3,7 @@ import PropTypes, { string } from "prop-types";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import ToogleAppBar from "../appBar/ToogleAppBar";
 import PersistentDrawer from "../drawer/PersistentDrawer";
-import { PersistentDashboardProps } from "src/types/PersistentDashboardProps";
+import { PersistentDashboardProps } from "../../types/PersistentDashboardProps";
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 export default function PersistentDashboard(props: PersistentDashboardProps) {
   const {
     title,
-    keys,
+    indexes,
     titles,
     icons,
     enableElevation,
@@ -30,7 +30,7 @@ export default function PersistentDashboard(props: PersistentDashboardProps) {
     handleModule,
     children
   } = props;
-  const classes = useStyles();
+  const classes = useStyles(props);
 
   return (
     <div className={classes.root}>
@@ -44,7 +44,7 @@ export default function PersistentDashboard(props: PersistentDashboardProps) {
       />
       <PersistentDrawer
         drawerWidth={240}
-        keys={keys}
+        indexes={indexes}
         titles={titles}
         icons={icons}
         openDrawer={openDrawer}
@@ -67,7 +67,7 @@ PersistentDashboard.propTypes = {
   enableElevation: PropTypes.bool,
   enableHide: PropTypes.bool,
 
-  keys: PropTypes.arrayOf(string).isRequired,
+  indexes: PropTypes.arrayOf(string).isRequired,
   titles: PropTypes.arrayOf(string).isRequired,
   icons: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

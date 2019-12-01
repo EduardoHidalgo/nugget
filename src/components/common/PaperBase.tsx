@@ -1,6 +1,6 @@
 import React from "react";
 import { Paper } from "@material-ui/core";
-import { Children } from "src/types/Children";
+import { Children } from "../../types/Children";
 
 interface PaperBaseProps extends Children {}
 
