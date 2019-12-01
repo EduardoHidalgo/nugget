@@ -38,13 +38,13 @@ export default function DrawerMenuBase(props: DrawerMenuBaseProps) {
       <Divider />
       <List dense disablePadding>
         {/* Mapea los módulos recibidos en el drawer */}
-        {titles.map((title: string, index: number) => (
+        {titles.map((title: string, i: number) => (
           <ListItem
             button
-            key={indexes[index]}
-            onClick={() => HandleClick(indexes[index])}
+            key={indexes[i]}
+            onClick={() => HandleClick(indexes[i])}
           >
-            <ListItemIcon>{icons[index]}</ListItemIcon>
+            <ListItemIcon>{icons[i]}</ListItemIcon>
             <ListItemText disableTypography>{title}</ListItemText>
           </ListItem>
         ))}
