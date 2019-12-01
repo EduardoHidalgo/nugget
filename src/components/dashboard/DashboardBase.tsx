@@ -97,34 +97,13 @@ export default function DashboardBase(props: DashboardBaseProps) {
   /* Mapea cada módulo del dashboard y le inyecta props específicos
   según el tipo de dashboard rendereado */
   function InyectModules() {
-    return React.Children.map(props.children, m => {
-      switch (type) {
-        case "permanent":
-          return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
-            moduleType: "permanent"
-          });
-        case "persistent":
-          return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
-            moduleType: "persistent",
-            openDrawer: openDrawer,
-            drawerWidth: 240
-          });
-        case "temporary":
-          return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
-            moduleType: "temporary",
-            openDrawer: openDrawer,
-            drawerWidth: 240
-          });
-        case "mobile":
-          return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
-            moduleType: "mobile"
-          });
-        default:
-          return cloneElement(m as React.ReactElement<InyectedModuleProps>, {
-            moduleType: "permanent"
-          });
-      }
-    });
+    return React.Children.map(props.children, m =>
+      cloneElement(m as React.ReactElement<InyectedModuleProps>, {
+        moduleType: type,
+        openDrawer: openDrawer,
+        drawerWidth: 240
+      })
+    );
   }
 
   const permanentDashboard = (
