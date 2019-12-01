@@ -36,8 +36,7 @@
     "update:patch": "npm version patch",
     "update:minor": "npm version minor",
     "update:major": "npm version major",
-    "prepare": "",
-    "publish": "npm publish"
+    "prepare": ""
   },
   "devDependencies": {
     "@babel/cli": "7.7.0",
