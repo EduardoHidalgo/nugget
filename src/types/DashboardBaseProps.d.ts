@@ -1,5 +1,6 @@
 import { ModuleProps } from "./ModuleProps";
 import { DashboardTheme } from "./DashboardTheme";
+import { DrawerBaseNativeProps } from "./DrawerBaseNativeProps";
 
 /** Interfaz que define las propiedades que debe
  * tener el componente "AppBarBase".
@@ -9,6 +10,9 @@ export interface DashboardBaseProps {
    * de la forma "out-of-the-box".
    */
   theme: DashboardTheme;
+
+  /** Recibe los props nativos de drawer desde Dashboard */
+  drawerProps: DrawerBaseNativeProps;
 
   /** Específica el tipo de dashboard a renderear. */
   type?: "permanent" | "persistent" | "temporary" | "mobile";

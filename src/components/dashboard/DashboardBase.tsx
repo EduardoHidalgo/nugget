@@ -22,7 +22,7 @@ import { DashboardBaseProps } from "../../types/DashboardBaseProps";
  * @returns JSX.Element
  */
 export default function DashboardBase(props: DashboardBaseProps) {
-  const { title, enableElevation, enableHide } = props;
+  const { drawerProps, title, enableElevation, enableHide } = props;
 
   /* Provee la capa de estilos en caso que se pasen via props */
   let theme;
@@ -109,6 +109,7 @@ export default function DashboardBase(props: DashboardBaseProps) {
   const permanentDashboard = (
     <PermanentDashboard
       title={title}
+      drawerProps={drawerProps}
       indexes={indexes}
       titles={titles}
       icons={icons}
@@ -128,6 +129,7 @@ export default function DashboardBase(props: DashboardBaseProps) {
   const persistentDashboard = (
     <PersistentDashboard
       title={title}
+      drawerProps={drawerProps}
       openDrawer={openDrawer}
       handleOpenDrawer={HandleOpenDrawer}
       indexes={indexes}
@@ -144,6 +146,7 @@ export default function DashboardBase(props: DashboardBaseProps) {
   const temporaryDashboard = (
     <TemporaryDashboard
       title={title}
+      drawerProps={drawerProps}
       openDrawer={openDrawer}
       handleOpenDrawer={HandleOpenDrawer}
       handleCloseDrawer={HandleCloseDrawer}
@@ -161,6 +164,7 @@ export default function DashboardBase(props: DashboardBaseProps) {
   const mobileDashboard = (
     <MobileDashboard
       openDrawer={openDrawer}
+      drawerProps={drawerProps}
       handleOpenDrawer={HandleOpenDrawer}
       handleCloseDrawer={HandleCloseDrawer}
       indexes={indexes}

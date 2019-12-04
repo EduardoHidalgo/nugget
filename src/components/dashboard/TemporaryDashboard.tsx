@@ -20,6 +20,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 export default function TemporaryDashboard(props: TemporaryDashboardProps) {
   const {
     title,
+    drawerProps,
     indexes,
     titles,
     icons,
@@ -44,6 +45,7 @@ export default function TemporaryDashboard(props: TemporaryDashboardProps) {
       />
       <TemporaryDrawer
         drawerWidth={240}
+        {...drawerProps}
         indexes={indexes}
         titles={titles}
         icons={icons}

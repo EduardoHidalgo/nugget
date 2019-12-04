@@ -1,10 +1,14 @@
 import { BottomAppBarProps } from "./BottomAppBarProps";
 import { Children } from "./Children";
+import { DrawerBaseNativeProps } from "./DrawerBaseNativeProps";
 
 /** Interfaz que define las propiedades que debe
  * tener el componente "MobileDashboard".
  */
 export interface MobileDashboardProps extends Children, BottomAppBarProps {
+  /** Recibe los props nativos de drawer desde Dashboard */
+  drawerProps: DrawerBaseNativeProps;
+
   /** Arreglo de indexes de los módulos. */
   indexes: Array<string>;
 

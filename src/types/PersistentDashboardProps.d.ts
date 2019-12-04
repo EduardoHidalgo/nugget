@@ -1,4 +1,5 @@
 import { Children } from "./Children";
+import { DrawerBaseNativeProps } from "./DrawerBaseNativeProps";
 
 /** Interfaz que define las propiedades que debe
  * tener el componente "PersistenDashboard".
@@ -6,6 +7,9 @@ import { Children } from "./Children";
 export interface PersistentDashboardProps extends Children {
   /** String que recibe el título a mostrar en el AppBar */
   title?: string;
+
+  /** Recibe los props nativos de drawer desde Dashboard */
+  drawerProps: DrawerBaseNativeProps;
 
   /** Arreglo de indexes de los módulos. */
   indexes: Array<string>;

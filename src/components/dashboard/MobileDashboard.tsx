@@ -20,6 +20,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
  */
 export default function MobileDashboard(props: MobileDashboardProps) {
   const {
+    drawerProps,
     indexes,
     titles,
     icons,
@@ -36,7 +37,7 @@ export default function MobileDashboard(props: MobileDashboardProps) {
       <BottomAppBar handleOpenDrawer={handleOpenDrawer} />
       <TemporaryDrawer
         type={"mobile"}
-        anchor={"bottom"}
+        {...drawerProps}
         drawerWidth={240}
         indexes={indexes}
         titles={titles}

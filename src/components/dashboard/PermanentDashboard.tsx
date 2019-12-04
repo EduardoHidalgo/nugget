@@ -20,6 +20,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 export default function PermanentDashboard(props: PermanentDashboardProps) {
   const {
     title,
+    drawerProps,
     indexes,
     titles,
     icons,
@@ -40,6 +41,7 @@ export default function PermanentDashboard(props: PermanentDashboardProps) {
       />
       <PermanentDrawer
         drawerWidth={240}
+        {...drawerProps}
         indexes={indexes}
         titles={titles}
         icons={icons}
