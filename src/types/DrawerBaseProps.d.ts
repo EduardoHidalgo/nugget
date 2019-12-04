@@ -14,6 +14,9 @@ export interface DrawerBaseProps
   /** Establece */
   elevation?: number;
 
+  /** Establece el tiempo en milisegundos que tarda el drawer en animar su entrada
+   * o salida. El valor se aplica por cada animación, no entre ambas.
+   */
   transitionDuration?: number;
 
   /** State que establece si el Drawer se encuentra abierto o cerrado. */
