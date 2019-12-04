@@ -36,6 +36,7 @@ export default function MobileDashboard(props: MobileDashboardProps) {
       <BottomAppBar handleOpenDrawer={handleOpenDrawer} />
       <TemporaryDrawer
         type={"mobile"}
+        anchor={"bottom"}
         drawerWidth={240}
         indexes={indexes}
         titles={titles}

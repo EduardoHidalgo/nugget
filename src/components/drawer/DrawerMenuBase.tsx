@@ -26,15 +26,18 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 export default function DrawerMenuBase(props: DrawerMenuBaseProps) {
   const classes = useStyles(props);
 
-  const { type, titles, icons, indexes, handleModule } = props;
+  const { type, disableToolbar, titles, icons, indexes, handleModule } = props;
 
   /* Manda la variable "index" para indicar que módulo fué seleccionado */
   const HandleClick = (index: string) => handleModule(index);
 
   return (
     <Fragment>
-      {/* Añade un toolbar spacing en el caso de que sea tipo "persistent" */}
-      {type != "persistent" ? <div className={classes.toolbar} /> : null}
+      {/* Añade un toolbar spacing en el caso de que no sea tipo "persistent",
+      o lo desactiva en caso de que el boolean disableToolbar aparezca. */}
+      {type != "persistent" && !disableToolbar ? (
+        <div className={classes.toolbar} />
+      ) : null}
       <Divider />
       <List dense disablePadding>
         {/* Mapea los módulos recibidos en el drawer */}
@@ -55,6 +58,7 @@ export default function DrawerMenuBase(props: DrawerMenuBaseProps) {
 
 DrawerMenuBase.propTypes = {
   type: PropTypes.string.isRequired,
+  disableToolbar: PropTypes.bool,
   indexes: PropTypes.array.isRequired,
   titles: PropTypes.array.isRequired,
   icons: PropTypes.arrayOf(PropTypes.element).isRequired,

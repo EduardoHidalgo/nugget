@@ -41,6 +41,8 @@ PermanentDrawer.propTypes = {
 
   type: PropTypes.oneOf(["permanent", "persistent", "temporary", "mobile"]),
   anchor: PropTypes.oneOf(["left", "top", "right", "bottom"]),
+  elevation: PropTypes.number,
+  disableToolbar: PropTypes.bool,
 
   openDrawer: PropTypes.bool,
   handleOpenDrawer: PropTypes.func,

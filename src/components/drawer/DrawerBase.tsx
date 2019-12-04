@@ -12,6 +12,8 @@ const useStyles = makeStyles<DrawerBaseProps>(() => ({
     /* Fix de separación innecesaria en drawer. mantener. */
     borderRight: "none !important"
   },
+  horizontalDrawer: {},
+  horizontalDrawerPaper: {},
   drawerHeader: {},
   privateSwippeableArea: {
     zIndex: 1099
@@ -44,15 +46,8 @@ const useDefaultStyles = makeStyles<DrawerBaseProps>(() => ({
  * @returns JSX.Element
  */
 export default function DrawerBase(props: DrawerBaseProps) {
-  /* En caso de que no se entregue un tipo de drawer, se propone un
-  conjunto de estilos default dado la obligatoriedad del drawerWidth. */
-  const classes =
-    props.type == null ? useDefaultStyles(props) : useStyles(props);
-
-  const [type, setType] = useState(props.type);
-  const [anchor, setAnchor] = useState(props.anchor);
-
   const {
+    disableToolbar,
     indexes,
     titles,
     icons,
@@ -62,6 +57,65 @@ export default function DrawerBase(props: DrawerBaseProps) {
     handleCloseDrawer,
     children
   } = props;
+
+  /* En caso de que no se entregue un tipo de drawer, se propone un
+  conjunto de estilos default dado la obligatoriedad del drawerWidth. */
+  const classes =
+    props.type == null ? useDefaultStyles(props) : useStyles(props);
+
+  const [type, setType] = useState(props.type);
+  const [anchor, setAnchor] = useState(props.anchor);
+  const [elevation, setElevation] = useState(
+    props.elevation != undefined ? props.elevation : 8
+  );
+  /* Booleano interno, filtra los estilos del drawer dependiendo del anchor */
+  const [horizontalDrawer, setHorizontalDrawer] = useState(
+    disableToolbar != undefined ? disableToolbar : false
+  );
+
+  /* Calcula el boolean "horizontalDrawer" cada que cambie el anchor. Es un
+  Effect debido a que el anchor "podría" cambiar en tiempo de render, es por
+  seguridad. */
+  useEffect(() => {
+    if (anchor == "top" || anchor == "bottom") setHorizontalDrawer(true);
+    else setHorizontalDrawer(false);
+  }, [anchor]);
+
+  /* Effect que maneja errores de estilos entre el tipo de drawer y el anchor.
+  Drawer no puede recibir anchor[top|bottom] en tipos de drawer diferentes a temporary. */
+  useEffect(() => {
+    if (
+      type != "temporary" &&
+      type != "mobile" &&
+      (anchor == "top" || anchor == "bottom")
+    ) {
+      console.warn(
+        'Drawer ha recibido el tipo "' +
+          type +
+          '" y anchor=[top|bottom], pero no es compatible ' +
+          "dicho anchor con el tipo. Solo Drawer de tipo " +
+          '"temporary" puede recibir anchor "' +
+          anchor +
+          '". Anchor será forzado a "left".'
+      );
+
+      setAnchor("left");
+    }
+  }, [type]);
+
+  /* Previene errores por el paso de un valor incorrecto de "elevation". */
+  useEffect(() => {
+    if (elevation < 0 || elevation > 16) {
+      console.warn(
+        'Drawer ha recibido el prop elevation con valor "' +
+          elevation +
+          '", pero este solo puede recibir un valor númerico entero ' +
+          "entre el rango 0-16. El valor será forzado a 8."
+      );
+
+      setElevation(8);
+    }
+  }, [elevation]);
 
   /* Aquí se renderea el menú del Drawer de manera dinámica y autommática. Toma
   el arreglo de titles, indexes y icons y los mapea dentro del menú. */
@@ -76,6 +130,15 @@ export default function DrawerBase(props: DrawerBaseProps) {
         titles={titles}
         icons={icons}
         handleModule={handleModule}
+        /* En caso de existir disableToolbar, lo setea.
+        En caso de drawer horizontal, quita el toolbar. */
+        disableToolbar={
+          disableToolbar != undefined
+            ? disableToolbar
+            : horizontalDrawer
+            ? true
+            : false
+        }
       />
     </Fragment>
   );
@@ -84,12 +147,15 @@ export default function DrawerBase(props: DrawerBaseProps) {
   requeridos para su uso. */
   const drawer = (
     <Drawer
-      className={classes.drawer}
-      variant={type == "mobile" ? undefined : type}
+      className={horizontalDrawer ? classes.horizontalDrawer : classes.drawer}
+      variant={type == "mobile" ? "temporary" : type}
       classes={{
-        paper: classes.drawerPaper
+        paper: horizontalDrawer
+          ? classes.horizontalDrawerPaper
+          : classes.drawerPaper
       }}
       anchor={anchor}
+      elevation={elevation}
       open={openDrawer}
       ModalProps={{
         keepMounted: true // Better open performance on mobile.
@@ -107,7 +173,9 @@ export default function DrawerBase(props: DrawerBaseProps) {
   const swipeableDrawer =
     type == "mobile" ? (
       <SwipeableDrawer
-        className={classes.drawer}
+        className={horizontalDrawer ? classes.horizontalDrawer : classes.drawer}
+        anchor={anchor}
+        elevation={elevation}
         SwipeAreaProps={{ className: classes.privateSwippeableArea }}
         open={openDrawer}
         onClose={handleCloseDrawer}
@@ -140,6 +208,8 @@ DrawerBase.propTypes = {
 
   type: PropTypes.oneOf(["permanent", "persistent", "temporary", "mobile"]),
   anchor: PropTypes.oneOf(["left", "top", "right", "bottom"]),
+  elevation: PropTypes.number,
+  disableToolbar: PropTypes.bool,
 
   openDrawer: PropTypes.bool,
   handleOpenDrawer: PropTypes.func,

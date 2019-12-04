@@ -11,6 +11,11 @@ export interface DrawerBaseProps
   /** Lado del que aparece el Drawer al aparecer. */
   anchor?: "left" | "top" | "right" | "bottom";
 
+  /** Establece */
+  elevation?: number;
+
+  transitionDuration?: number;
+
   /** State que establece si el Drawer se encuentra abierto o cerrado. */
   openDrawer: boolean;
 

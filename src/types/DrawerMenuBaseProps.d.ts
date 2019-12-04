@@ -4,6 +4,9 @@ export interface DrawerMenuBaseProps {
   /** Tipo de Drawer a renderear. */
   type?: "permanent" | "persistent" | "temporary" | "mobile";
 
+  /** Desactiva la visibilidad del toolbar en el drawer. default = false */
+  disableToolbar?: boolean;
+
   /** Arreglo de indexes de los módulos. */
   indexes: Array<string>;
 

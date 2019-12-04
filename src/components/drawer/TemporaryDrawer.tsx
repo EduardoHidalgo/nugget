@@ -14,6 +14,13 @@ const useStyles = makeStyles<Theme, TemporaryDrawerProps>(() => ({
   },
   drawerPaper: {
     width: props => +props.drawerWidth
+  },
+  /* Estilos en caso de que anchor=[top|bottom] */
+  horizontalDrawer: {
+    width: "auto"
+  },
+  horizontalDrawerPaper: {
+    width: "auto"
   }
 }));
 
@@ -52,6 +59,8 @@ TemporaryDrawer.propTypes = {
 
   type: PropTypes.oneOf(["permanent", "persistent", "temporary", "mobile"]),
   anchor: PropTypes.oneOf(["left", "top", "right", "bottom"]),
+  elevation: PropTypes.number,
+  disableToolbar: PropTypes.bool,
 
   openDrawer: PropTypes.bool,
   handleOpenDrawer: PropTypes.func,
