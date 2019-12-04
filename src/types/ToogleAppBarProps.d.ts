@@ -20,4 +20,7 @@ export interface ToogleAppBarProps {
   /** Función que comunica el dashboard con el componente. Hace trigger del
   estado "openDrawer" del drawer. */
   handleOpenDrawer: () => void;
+
+  /** Lado del que aparece el Drawer al aparecer. */
+  isRight: boolean;
 }

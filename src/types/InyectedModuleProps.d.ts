@@ -16,4 +16,7 @@ export interface InyectedModuleProps extends ModuleProps, Children {
 
   /** State que establece si el Drawer se encuentra abierto o cerrado. */
   openDrawer: boolean;
+
+  /** Lado del que aparece el Drawer al aparecer. */
+  isRight: boolean;
 }

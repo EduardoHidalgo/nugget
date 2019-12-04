@@ -21,6 +21,7 @@ export default function PersistentDashboard(props: PersistentDashboardProps) {
   const {
     title,
     drawerProps,
+    isRight,
     indexes,
     titles,
     icons,
@@ -38,11 +39,13 @@ export default function PersistentDashboard(props: PersistentDashboardProps) {
       <ToogleAppBar
         title={title}
         drawerWidth={240}
+        isRight={isRight}
         enableHide={enableHide}
         enableElevation={enableElevation}
         openDrawer={openDrawer}
         handleOpenDrawer={handleOpenDrawer}
       />
+      {isRight ? children : null}
       <PersistentDrawer
         drawerWidth={240}
         {...drawerProps}
@@ -54,7 +57,7 @@ export default function PersistentDashboard(props: PersistentDashboardProps) {
         handleCloseDrawer={() => {}}
         handleModule={handleModule}
       />
-      {children}
+      {isRight ? null : children}
     </div>
   );
 }

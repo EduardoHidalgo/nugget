@@ -21,6 +21,7 @@ export default function PermanentDashboard(props: PermanentDashboardProps) {
   const {
     title,
     drawerProps,
+    isRight,
     indexes,
     titles,
     icons,
@@ -36,9 +37,11 @@ export default function PermanentDashboard(props: PermanentDashboardProps) {
       <PermanentAppBar
         title={title}
         drawerWidth={240}
+        isRight={isRight}
         enableHide={enableHide}
         enableElevation={enableElevation}
       />
+      {isRight ? children : null}
       <PermanentDrawer
         drawerWidth={240}
         {...drawerProps}
@@ -50,7 +53,7 @@ export default function PermanentDashboard(props: PermanentDashboardProps) {
         handleCloseDrawer={() => {}}
         handleModule={handleModule}
       />
-      {children}
+      {isRight ? null : children}
     </div>
   );
 }

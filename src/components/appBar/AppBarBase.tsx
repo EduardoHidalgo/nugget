@@ -15,7 +15,7 @@ import { AppBarBaseProps } from "../../types/AppBarBaseProps";
  * @returns JSX.Element
  */
 export default function AppBarBase(props: AppBarBaseProps) {
-  const { classes, title, position, styles, children } = props;
+  const { classes, title, position, styles, isRight, children } = props;
   const [enableElevation] = useState(props.enableElevation);
   const [enableHide, setEnableHide] = useState(props.enableHide);
 
@@ -36,7 +36,12 @@ export default function AppBarBase(props: AppBarBaseProps) {
       <HideOnScroll enableHide={enableHide}>
         <AppBar
           position={position}
-          className={clsx(classes.appBar, styles)}
+          /* En caso que el drawer esté a la derecha, establece otros estilos */
+          className={
+            !isRight
+              ? clsx(classes.appBar, styles)
+              : clsx(classes.appBarRight, styles)
+          }
           classes={{ root: classes.root }}
         >
           <Toolbar>

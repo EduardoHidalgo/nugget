@@ -15,4 +15,7 @@ export interface PermanentAppBarProps extends MaterialBase {
 
   /** Number que define el ancho del drawer. */
   drawerWidth: number;
+
+  /** Lado del que aparece el Drawer al aparecer. */
+  isRight: boolean;
 }

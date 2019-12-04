@@ -25,6 +25,14 @@ const useStyles = makeStyles<DashboardTheme, ToogleAppBarProps>(
         duration: theme.transitions.duration.enteringScreen
       })
     },
+    appBarShiftRight: {
+      width: props => `calc(100% - ${props.drawerWidth}px)`,
+      marginRight: props => +props.drawerWidth,
+      transition: theme.transitions.create(["margin", "width"], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen
+      })
+    },
     appBarTitle: {
       ...theme.appBarTitle
     },
@@ -46,16 +54,23 @@ const useStyles = makeStyles<DashboardTheme, ToogleAppBarProps>(
  * @returns JSX.Element
  */
 export default function ToogleAppBar(props: ToogleAppBarProps) {
-  const { title, handleOpenDrawer, openDrawer } = props;
+  const { title, handleOpenDrawer, openDrawer, isRight } = props;
   const classes = useStyles(props);
 
   return (
     <AppBarBase
       classes={classes}
-      /* dependiendo del boolean "openDrawer" renderea ciertos estilos */
-      styles={clsx(classes.appBar, {
-        [classes.appBarShift]: openDrawer
-      })}
+      /* dependiendo del boolean "openDrawer" renderea ciertos estilos. en caso
+      de que isRight=true, renderea un estilo diferente. */
+      styles={
+        !isRight
+          ? clsx(classes.appBar, {
+              [classes.appBarShift]: openDrawer
+            })
+          : clsx(classes.appBar, {
+              [classes.appBarShiftRight]: openDrawer
+            })
+      }
       position={"fixed"}
       {...props}
     >

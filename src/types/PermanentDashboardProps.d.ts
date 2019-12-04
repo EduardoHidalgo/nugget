@@ -12,6 +12,9 @@ export interface PermanentDashboardProps extends Children {
   /** Recibe los props nativos de drawer desde Dashboard */
   drawerProps: DrawerBaseNativeProps;
 
+  /** Lado del que aparece el Drawer al aparecer. */
+  isRight: boolean;
+
   /** Arreglo de indexes de los módulos. */
   indexes: Array<string>;
 

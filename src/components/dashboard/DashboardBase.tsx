@@ -44,6 +44,14 @@ export default function DashboardBase(props: DashboardBaseProps) {
   let titles: Array<string> = [];
   let icons: Array<React.ReactElement> = [];
 
+  /* En caso de que el prop drawerProps.anchor = right, manda un boolean */
+  const isRight: boolean =
+    drawerProps != undefined
+      ? drawerProps.anchor == "right"
+        ? true
+        : false
+      : false;
+
   /* Cambia en tiempo real el tipo de componente en caso que
   la ventana sufra un cambio en el tamaño. */
   useEffect(() => {
@@ -101,7 +109,8 @@ export default function DashboardBase(props: DashboardBaseProps) {
       cloneElement(m as React.ReactElement<InyectedModuleProps>, {
         moduleType: type,
         openDrawer: openDrawer,
-        drawerWidth: 240
+        drawerWidth: 240,
+        isRight: isRight
       })
     );
   }
@@ -110,6 +119,7 @@ export default function DashboardBase(props: DashboardBaseProps) {
     <PermanentDashboard
       title={title}
       drawerProps={drawerProps}
+      isRight={isRight}
       indexes={indexes}
       titles={titles}
       icons={icons}
@@ -130,6 +140,7 @@ export default function DashboardBase(props: DashboardBaseProps) {
     <PersistentDashboard
       title={title}
       drawerProps={drawerProps}
+      isRight={isRight}
       openDrawer={openDrawer}
       handleOpenDrawer={HandleOpenDrawer}
       indexes={indexes}

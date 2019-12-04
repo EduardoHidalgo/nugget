@@ -17,4 +17,7 @@ export interface AppBarBaseProps
 
   /** Enum de strings que establece una propiedad de estilos del AppBar de material-ui */
   position?: "static" | "absolute" | "fixed" | "relative" | "sticky";
+
+  /** Lado del que aparece el Drawer al aparecer. */
+  isRight?: boolean;
 }

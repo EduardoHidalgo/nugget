@@ -7,7 +7,7 @@ import ContainerBase from "../common/ContainerBase";
 import { InyectedModuleProps } from "../../types/InyectedModuleProps";
 
 export default function Module(props: InyectedModuleProps) {
-  const { moduleType, drawerWidth, openDrawer, children } = props;
+  const { moduleType, drawerWidth, openDrawer, isRight, children } = props;
 
   /* Dependiendo de que tipo de dashboard se haga render, el componente "module"
   se renderea con estilos especiales para dicho dashboard.  */
@@ -16,7 +16,11 @@ export default function Module(props: InyectedModuleProps) {
       return <PermanentModule>{children}</PermanentModule>;
     case "persistent":
       return (
-        <PersistentModule drawerWidth={drawerWidth} openDrawer={openDrawer}>
+        <PersistentModule
+          drawerWidth={drawerWidth}
+          openDrawer={openDrawer}
+          isRight={isRight}
+        >
           {children}
         </PersistentModule>
       );

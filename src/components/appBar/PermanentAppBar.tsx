@@ -14,6 +14,11 @@ const useStyles = makeStyles<DashboardTheme, PermanentAppBarProps>(
     },
     appBarTitle: {
       ...theme.appBarTitle
+    },
+    appBarRight: {
+      width: props => `calc(100% - ${props.drawerWidth}px)`,
+      marginRight: props => props.drawerWidth,
+      ...theme.appBar
     }
   })
 );
@@ -27,7 +32,7 @@ const useStyles = makeStyles<DashboardTheme, PermanentAppBarProps>(
  * @returns JSX.Element
  */
 export default function PermanentAppBar(props: PermanentAppBarProps) {
-  const { title, enableElevation, enableHide } = props;
+  const { title, enableElevation, enableHide, isRight } = props;
   const classes = useStyles(props);
 
   return (
@@ -37,6 +42,7 @@ export default function PermanentAppBar(props: PermanentAppBarProps) {
       title={title}
       enableHide={enableHide}
       enableElevation={enableElevation}
+      isRight={isRight}
     />
   );
 }
