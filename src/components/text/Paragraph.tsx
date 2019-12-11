@@ -7,7 +7,11 @@ import { Children } from "../../types/Children";
 interface Props extends MaterialBase, Children {}
 
 export default function Paragraph(props: Props) {
-  return <TextBase component="p">{props.children}</TextBase>;
+  return (
+    <TextBase component="p" {...props}>
+      {props.children}
+    </TextBase>
+  );
 }
 
 Paragraph.propTypes = {
