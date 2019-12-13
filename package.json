@@ -26,7 +26,7 @@
     "build": "npm run ts-build && npm run babel-build",
     "del-builds": "rmdir /S /Q build && rmdir /S /Q dist",
     "package": "npm pack && npm run rename-pkg",
-    "delete-pkg": "del nugget.tgz && del nugget-ui-%npm_package_version%.tgz",
+    "delete-pkg": "del nugget.tgz",
     "rename-pkg": "rename nugget-ui-%npm_package_version%.tgz nugget.tgz",
     "version-pkg": "echo nugget-ui-%npm_package_version%.tgz",
     "package:win": "npm run delete-pkg && npm run build && npm run package",
