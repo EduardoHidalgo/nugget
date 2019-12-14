@@ -1,4 +1,5 @@
-import React, { Fragment } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import {
   Divider,
@@ -64,3 +65,15 @@ export default function ExpansionPanelContent(
     </ExpansionPanel>
   );
 }
+
+ExpansionPanelContent.propTypes = {
+  index: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  divider: PropTypes.bool,
+  defaultExpanded: PropTypes.bool,
+  disabled: PropTypes.bool,
+  expanded: PropTypes.bool,
+  enableAccordion: PropTypes.bool,
+  open: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
+  onChange: PropTypes.func.isRequired
+};
