@@ -7,12 +7,14 @@ import { Children } from "./Children";
  * @see https://material-ui.com/api/icon-button/
  */
 export interface IconButtonBaseProps extends MaterialBase {
+  /** Recibe un elemento como ícono. */
+  icon: React.ReactNode;
+
   /** Boolean que setea estilos para desactivar el botón. */
   disabled?: boolean;
 
   /** Boolean que desactiva el efecto "ripple" cuando se
-   * hace foco con el teclado.
-   */
+   * hace foco con el teclado. */
   disableFocusRipple?: boolean;
 
   /** Boolean que desactiva el efecto "ripple". */
@@ -24,6 +26,6 @@ export interface IconButtonBaseProps extends MaterialBase {
   /** Tamaño del botón. */
   size?: "small" | "medium";
 
-  /** Recibe un elemento Icon como children. */
-  children: Children;
+  /** Función que recibe el componente que se ejecutará al hacer click. */
+  onClick: () => void;
 }

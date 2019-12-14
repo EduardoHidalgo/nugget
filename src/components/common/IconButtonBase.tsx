@@ -18,16 +18,17 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
  * @returns JSX.Element
  */
 export default function IconButtonBase(props: IconButtonBaseProps) {
+  const classes = useStyles(props);
+
   const {
+    icon,
     disabled,
     disableFocusRipple,
     disableRipple,
     edge,
     size,
-    children
+    onClick
   } = props;
-
-  const classes = useStyles(props);
 
   return (
     <IconButton
@@ -37,29 +38,23 @@ export default function IconButtonBase(props: IconButtonBaseProps) {
       disableRipple={disableRipple}
       edge={edge}
       size={size}
+      onClick={onClick}
     >
-      {children}
+      {icon}
     </IconButton>
   );
 }
 
 IconButtonBase.defaultProps = {
-  classes: {},
-  disabled: false,
-  disableFocusRipple: false,
-  disableRipple: false,
-  edge: false,
-  size: "medium",
-  children: "Text Example"
+  size: "medium"
 };
 
 IconButtonBase.propTypes = {
-  classes: PropTypes.object,
+  icon: PropTypes.node.isRequired,
   disabled: PropTypes.bool,
   disableFocusRipple: PropTypes.bool,
   disableRipple: PropTypes.bool,
-  edge: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  edge: PropTypes.oneOf(["start", "end", false]),
   size: PropTypes.string,
-
-  children: PropTypes.node
+  onClick: PropTypes.func.isRequired
 };
