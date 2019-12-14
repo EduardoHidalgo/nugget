@@ -1,5 +1,6 @@
 import React from "react";
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import { Theme, makeStyles } from "@material-ui/core/styles";
 import { ExpansionPanelBaseProps } from "../../types/ExpansionPanelBaseProps";
 import ExpansionPanelContent from "./ExpansionPanelContent";
 
@@ -55,3 +56,9 @@ export default function ExpansionPanelBase(props: ExpansionPanelBaseProps) {
     </div>
   );
 }
+
+ExpansionPanelBase.propTypes = {
+  divider: PropTypes.bool,
+  enableAccordion: PropTypes.bool,
+  elements: PropTypes.arrayOf(PropTypes.object).isRequired
+};
