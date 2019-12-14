@@ -1,5 +1,4 @@
 import { MaterialBase } from "./MaterialBase";
-import { ButtonBaseProps } from "./ButtonGroupBaseProps";
 import { ButtonBaseProps } from "./ButtonBaseProps";
 
 /** Interfaz que define las propiedades que debe
