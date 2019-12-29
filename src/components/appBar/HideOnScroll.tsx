@@ -20,7 +20,7 @@ interface Props extends HideOnScrollProps, HideOnScrollChildren {}
  */
 export function HideOnScroll(props: Props) {
   const { window, enableHide, enableElevation, children } = props;
-  const elevation: number = props.elevation ? props.elevation : 4;
+  const elevation: number = props.elevation;
   const originalChildren = children;
 
   /* Calcula el evento de trigger al hacer scroll en la ventana */
