@@ -1,8 +1,21 @@
-import React, { Suspense, cloneElement } from "react";
-import PropTypes from "prop-types";
-import useFetch from "./useFetch";
+import React, {
+  Suspense,
+  cloneElement,
+  SuspenseProps,
+  ReactElement
+} from "react";
+import { useFetch, IParams } from "./useFetch";
+import { Children } from "../../types/Children";
 
-export default function Fetching(props) {
+export interface IFetchingProps {
+  url: RequestInfo;
+  params?: IParams;
+  fallback: SuspenseProps;
+  fault: React.ElementType;
+  children: Children;
+}
+
+export default function Fetching(props: IFetchingProps) {
   const { url, params, fallback, fault, children } = props;
   const { data, error, loading } = useFetch(url, params);
 
@@ -10,7 +23,7 @@ export default function Fetching(props) {
   componente children. también ayuda a mantener isolado el
   componente de la lógica del manejo de la data. */
   function InyectData() {
-    return cloneElement(children, {
+    return cloneElement(children as ReactElement, {
       data: data
     });
   }
@@ -28,21 +41,3 @@ export default function Fetching(props) {
     </Suspense>
   );
 }
-
-useFetch.propTypes = {
-  url: PropTypes.string.isRequired,
-  params: PropTypes.object,
-
-  fallback: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
-  fault: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired
-};

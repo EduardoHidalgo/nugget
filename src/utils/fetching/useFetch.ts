@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import fetch from "isomorphic-unfetch";
 
-export default function useFetch(url, params) {
+export interface IParams extends RequestInit {
+  method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+}
+
+export function useFetch(url: RequestInfo, params?: IParams) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     /* previene memory leaks cuando no se desuscribe
       correctamente los useStates. */
     let isSubscribe = true;
